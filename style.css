@@ -1,0 +1,421 @@
+/*
+Theme Name:  Nano Design Build
+Theme URI:   https://your-client-website.com/
+Author:      Your Name
+Author URI:  https://your-website.com/
+Description: A custom, modern, and responsive theme for Nano Design Build.
+Version:     1.0.0
+License:     GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Tags:        custom-background, custom-logo, portfolio
+Text Domain: nanodesignbuild
+*/
+
+/*--------------------------------------------------------------
+>>> TABLE OF CONTENTS:
+----------------------------------------------------------------
+# Generic
+# Layout
+# Header & Footer
+# Projects Grid (archive-project.php)
+# Single Project (single-project.php)
+--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------
+# Generic
+--------------------------------------------------------------*/
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 18px;
+    line-height: 1.6;
+    color: #333;
+    background-color: #fdfdfd;
+    margin: 0; /* This line removes the whitespace */
+    padding: 0;
+}
+
+a {
+    color: #1a1a1a;
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+}
+
+a:hover {
+    color: #888;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Garamond", "Times New Roman", serif;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/*--------------------------------------------------------------
+# Layout
+--------------------------------------------------------------*/
+.site-main {
+    max-width: 1200px;
+    margin: 4rem auto;
+    padding: 0 2rem;
+}
+
+/*--------------------------------------------------------------
+# Header & Footer
+--------------------------------------------------------------*/
+body > header {
+    padding: 2rem;
+    border-bottom: 1px solid #eee;
+}
+
+body > header h1 {
+    margin: 0;
+    font-size: 24px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+body > footer {
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid #eee;
+    font-size: 14px;
+    color: #999;
+}
+
+
+/*--------------------------------------------------------------
+# Magazine Style Project Archive
+--------------------------------------------------------------*/
+.page-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.page-header .page-title {
+    font-size: 52px;
+    margin-bottom: 0.5rem;
+}
+
+.page-header .page-subtitle {
+    font-size: 18px;
+    color: #888;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.project-archive-list {
+    border-top: 1px solid #eee;
+}
+
+.project-archive-item {
+    border-bottom: 1px solid #eee;
+}
+
+.project-archive-link {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr); /* 12-column grid */
+    align-items: center;
+    padding: 3rem 0;
+    gap: 2rem;
+}
+
+.project-archive-image {
+    grid-column: span 7; /* Image takes 7 columns */
+    overflow: hidden;
+}
+
+.project-archive-image img {
+    transition: transform 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.project-archive-link:hover .project-archive-image img {
+    transform: scale(1.05);
+}
+
+.project-archive-details {
+    grid-column: span 5; /* Text takes 5 columns */
+    padding-right: 2rem;
+}
+
+/* Alternating Layout: for every ODD item, reverse the order */
+.project-archive-item:nth-child(odd) .project-archive-image {
+    grid-column: span 7 / -1; /* Start at column 7, go to the end */
+    grid-row: 1;
+}
+
+.project-archive-item:nth-child(odd) .project-archive-details {
+    grid-column: 1 / span 5; /* Start at column 1, take up 5 */
+    grid-row: 1;
+    text-align: right;
+    padding-left: 2rem;
+    padding-right: 0;
+}
+
+.project-archive-details .project-title {
+    font-size: 42px;
+    line-height: 1.1;
+    margin: 0 0 1rem 0;
+    font-weight: normal;
+}
+
+.project-archive-details .project-excerpt {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #666;
+    margin: 1rem 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-weight: 400;
+}
+
+.project-archive-details .project-location-tag {
+    font-family: monospace;
+    font-size: 14px;
+    color: #888;
+    text-transform: uppercase;
+}
+
+/* --- Responsive Mobile --- */
+@media (max-width: 768px) {
+    .project-archive-link {
+        display: block; /* Stack everything vertically */
+        padding: 2rem 0;
+    }
+    .project-archive-image {
+        margin-bottom: 1rem;
+    }
+    .project-archive-item:nth-child(odd) .project-archive-details {
+        text-align: left; /* Reset text alignment */
+        padding-left: 0;
+    }
+}
+
+/*--------------------------------------------------------------
+# Single Project (single-project.php)
+--------------------------------------------------------------*/
+.single-project .entry-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.single-project .entry-title {
+    font-size: 48px;
+}
+
+.single-project .post-thumbnail {
+    margin-bottom: 2rem;
+}
+
+.single-project .entry-content {
+    max-width: 800px;
+    margin: 0 auto 2rem auto;
+}
+
+.single-project .project-meta {
+    max-width: 800px;
+    margin: 0 auto;
+    border-top: 1px solid #eee;
+    padding-top: 1.5rem;
+    font-family: monospace;
+    font-size: 16px;
+    color: #555;
+}
+
+/*--------------------------------------------------------------
+# Magazine Spread Single Project Layout (Sticky Image)
+--------------------------------------------------------------*/
+
+/* We need to remove margin from the body for this specific template */
+.single-project body {
+    margin: 0;
+}
+
+.full-page-project-grid {
+    display: grid;
+    grid-template-columns: 40% 60%; /* Adjust ratio as needed */
+    align-items: start; /* Align items to the top */
+}
+
+/* Left Column Styling */
+.project-content-scroll {
+    padding: 3rem;
+    /* We no longer need overflow or fixed height here */
+}
+
+.site-header-condensed {
+    margin-bottom: 4rem;
+}
+
+.site-header-condensed h1 {
+    font-size: 24px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0;
+}
+
+.project-content-scroll .entry-title {
+    font-size: 52px;
+    line-height: 1.1;
+    margin-bottom: 2rem;
+}
+
+.project-content-scroll .entry-content {
+    color: #555;
+    margin-bottom: 2rem;
+}
+
+.project-content-scroll .project-meta {
+    border-top: 1px solid #eee;
+    padding-top: 1.5rem;
+    margin-bottom: 4rem;
+}
+
+.project-meta .meta-label {
+    display: block;
+    font-family: monospace;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #888;
+    letter-spacing: 0.5px;
+}
+
+.site-footer-condensed {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid #eee;
+    font-size: 14px;
+    color: #999;
+}
+
+
+/* Right Column Styling (The Magic Happens Here) */
+.project-image-column {
+    position: -webkit-sticky; /* For Safari */
+    position: sticky;
+    top: 0; /* Stick to the top of the viewport */
+    height: 100vh; /* It should always be the full height of the screen */
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+
+/* --- Responsive Mobile --- */
+@media (max-width: 768px) {
+    .full-page-project-grid {
+        display: block; /* Revert to a normal block layout */
+    }
+
+    .project-image-column {
+       position: static; /* Un-stick the image on mobile */
+       height: 60vh; 
+    }
+}
+
+/*--------------------------------------------------------------
+# Homepage (Original Baseline)
+--------------------------------------------------------------*/
+.hero-video-section {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    overflow: hidden;
+    background-color: #111; /* Fallback color */
+}
+
+.hero-video-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 3;
+    padding: 2rem;
+}
+
+.hero-title {
+    font-size: 62px;
+}
+
+.hero-subtitle {
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.homepage-projects {
+    max-width: 1200px;
+    margin: 4rem auto;
+    padding: 0 2rem;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 42px;
+    margin-bottom: 3rem;
+    font-weight: normal;
+}
+
+.section-link {
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.section-link a {
+    border: 1px solid #ccc;
+    padding: 0.8rem 2rem;
+    border-radius: 50px;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.section-link a:hover {
+    background-color: #f5f5f5;
+    border-color: #aaa;
+}
+
+/*--------------------------------------------------------------
+# Minimalist Navigation
+--------------------------------------------------------------*/
+.site-nav-minimal {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    z-index: 1000; /* Ensure it's on top of everything */
+}
+
+.site-nav-minimal a {
+    font-family: monospace;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    color: #333;
+    mix-blend-mode: difference; /* This makes the text invert color based on the background */
+    font-weight: bold;
+}
+
