@@ -61,6 +61,7 @@ get_header(); ?>
             <?php wp_reset_postdata(); ?>
         </div>
         <div class="section-link">
+			<img src="<?php echo get_template_directory_uri(); ?>/images/nano.svg" alt="Nano Design Build Logo" class="final-card-logo">
             <a href="<?php echo get_post_type_archive_link('project'); ?>">View All Projects</a>
         </div>
     <?php endif; ?>

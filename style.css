@@ -383,6 +383,9 @@ body > footer {
 .section-link {
     text-align: center;
     margin-top: 3rem;
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center;   /* Center items horizontally */
 }
 
 .section-link a {
@@ -419,3 +422,11 @@ body > footer {
     font-weight: bold;
 }
 
+/*--------------------------------------------------------------
+# Homepage Final Card Logo
+--------------------------------------------------------------*/
+.final-card-logo {
+    width: 120px; /* Adjust size as needed */
+    height: auto;
+    margin-bottom: 2rem;
+}
