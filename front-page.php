@@ -7,7 +7,7 @@ get_header(); ?>
 
 <section class="hero-video-section">
     <video playsinline autoplay muted loop poster="YOUR_POSTER_IMAGE_URL.jpg" class="hero-video-bg">
-        <source src="http://localhost:10004/wp-content/uploads/2025/07/200717-NGD-Align63.mp4" type="video/mp4">
+        <source src="http://nano-design-build-v1.test/wp-content/uploads/2025/07/250705-NanoGreenDot-NanoBackgroundVideo.mp4" type="video/mp4">
     </video>
     <div class="hero-overlay"></div>
     <div class="hero-content">
