@@ -20,7 +20,7 @@ This project is the development of a custom portfolio website for Nano Green Dot
 
 * **Platform:** WordPress (Single Site)
 * **Development Environment:** Local by Flywheel
-* **Theme:** **"Kestrel"** (codename for our custom block theme, based on the `v.0.0.1` prototype). It is a fully custom block theme designed for performance and ease of content management.
+* **Theme:** **"nano-design-build"** (codename for our custom block theme, based on the `v.0.0.1` prototype). It is a fully custom block theme designed for performance and ease of content management.
 * **Key Plugins:**
     * **Contact Form:** TBD (Recommendation: Contact Form 7 or WPForms)
     * **SEO:** TBD (Recommendation: Yoast SEO or Rank Math)
