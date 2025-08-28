@@ -74,7 +74,7 @@ The project will be developed in four distinct phases.
 ### Phase 1: Foundation & Setup (In Progress)
 
 * [ ] **1.1:** Initialize Git repository and project structure.
-* [ ] **1.2:** Clean and prepare the `v.0.0.1` theme files into the new "Kestrel" theme structure.
+* [ ] **1.2:** Clean and prepare the `v.0.0.1` theme files into the new "nano-design-build" theme structure.
 * [ ] **1.3:** Define global styles and fonts in `theme.json`.
 
 ### Phase 2: Core Page & Template Construction
