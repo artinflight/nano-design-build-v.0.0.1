@@ -430,3 +430,45 @@ body > footer {
     height: auto;
     margin-bottom: 2rem;
 }
+
+/*--------------------------------------------------------------
+# Block Theme Styles (Front Page Parity)
+--------------------------------------------------------------*/
+.work-loop {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.work-row {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    padding: 3rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.work-loop > li:first-child .work-row {
+    border-top: 1px solid #eee;
+}
+
+.work-text {
+    flex: 1;
+}
+
+.work-image {
+    flex: 1;
+}
+
+/* The magic: reverse the order on even rows */
+@media (min-width: 1024px) {
+    .work-loop > li:nth-child(even) .work-row {
+        flex-direction: row-reverse;
+    }
+}
+
+@media (max-width: 768px) {
+    .work-row {
+        flex-direction: column;
+    }
+}
