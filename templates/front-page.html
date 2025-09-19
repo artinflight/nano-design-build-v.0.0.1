@@ -2,69 +2,44 @@
 
 <!-- wp:group {"tagName":"main","layout":{"type":"default"}} -->
 <main>
-	<!-- wp:cover {"url":"/wp-content/uploads/2025/07/placeholder-image.jpg","dimRatio":50,"overlayColor":"black","contentPosition":"center center","isDark":false,"align":"full","className":"hero-video-section"} -->
-	<div class="wp-block-cover alignfull is-light hero-video-section">
-		<span aria-hidden="true" class="wp-block-cover__background has-black-background-color has-background-dim-50 has-background-dim"></span>
-		<img class="wp-block-cover__image-background" alt="" src="/wp-content/uploads/2025/07/placeholder-image.jpg" data-object-fit="cover"/>
-		<div class="wp-block-cover__inner-container">
-			<!-- wp:html -->
-			<video playsinline autoplay muted loop class="hero-video-bg">
-				<source src="/wp-content/uploads/2025/07/250705-NanoGreenDot-NanoBackgroundVideo.mp4" type="video/mp4">
-			</video>
-			<!-- /wp:html -->
-			<!-- wp:group {"className":"hero-content","layout":{"type":"constrained"}} -->
-			<div class="hero-content">
-				<!-- wp:heading {"level":1,"className":"hero-title"} -->
-				<h1 class="hero-title">Designing & Building The Future</h1>
-				<!-- /wp:heading -->
-				<!-- wp:paragraph {"className":"hero-subtitle"} -->
-				<p class="hero-subtitle">We craft bespoke homes that merge timeless design with modern living.</p>
-				<!-- /wp:paragraph -->
+	<!-- wp:html -->
+<video class="hero-video-bg" playsinline autoplay muted loop src="/wp-content/uploads/2025/07/250705-NanoGreenDot-NanoBackgroundVideo.mp4"></video>
+<!-- /wp:html -->
+
+	<!-- wp:html -->
+<ul class="work-loop">
+	<li>
+		<div class="work-row">
+			<div class="work-text">
+				<a class="work-link" href="/project/placeholder-project-1/">
+					<h2>Project Title 1</h2>
+					<p>A brief description of the first project goes here. It highlights the key features and design philosophy.</p>
+				</a>
 			</div>
-			<!-- /wp:group -->
+			<div class="work-image">
+				<a class="work-link" href="/project/placeholder-project-1/">
+					<img src="/wp-content/uploads/2025/07/placeholder-thumb-1.jpg" alt="Placeholder image for Project 1" />
+				</a>
+			</div>
 		</div>
-	</div>
-	<!-- /wp:cover -->
-
-	<!-- wp:group {"className":"homepage-projects","layout":{"type":"constrained"}} -->
-	<div class="homepage-projects">
-		<!-- wp:heading {"level":2,"className":"section-title"} -->
-		<h2 class="section-title">Recent Work</h2>
-		<!-- /wp:heading -->
-
-		<!-- wp:query {"queryId":1,"query":{"perPage":3,"pages":0,"offset":0,"postType":"project","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":false},"displayLayout":{"type":"list"},"className":"project-archive-list"} -->
-		<div class="project-archive-list">
-			<!-- wp:post-template -->
-				<!-- wp:group {"className":"project-archive-item"} -->
-				<div class="project-archive-item">
-					<!-- wp:post-featured-image {"isLink":true,"width":"100%","height":"auto","className":"project-archive-image"} /-->
-					<!-- wp:group {"className":"project-archive-details"} -->
-					<div class="project-archive-details">
-						<!-- wp:post-title {"isLink":true,"className":"project-title"} /-->
-						<!-- wp:post-excerpt {"className":"project-excerpt"} /-->
-						<!-- wp:post-terms {"term":"location","className":"project-location-tag"} /-->
-					</div>
-					<!-- /wp:group -->
-				</div>
-				<!-- /wp:group -->
-			<!-- /wp:post-template -->
+	</li>
+	<li>
+		<div class="work-row">
+			<div class="work-text">
+				<a class="work-link" href="/project/placeholder-project-2/">
+					<h2>Project Title 2</h2>
+					<p>This is a short summary of the second project, emphasizing its unique architectural style and materials.</p>
+				</a>
+			</div>
+			<div class="work-image">
+				<a class="work-link" href="/project/placeholder-project-2/">
+					<img src="/wp-content/uploads/2025/07/placeholder-thumb-2.jpg" alt="Placeholder image for Project 2" />
+				</a>
+			</div>
 		</div>
-		<!-- /wp:query -->
-
-		<!-- wp:group {"className":"section-link","layout":{"type":"flex","justifyContent":"center"}} -->
-		<div class="section-link">
-			<!-- wp:image {"width":50,"height":50,"sizeSlug":"full","linkDestination":"none","className":"final-card-logo"} -->
-			<figure class="wp-block-image size-full is-resized final-card-logo">
-				<img src="/wp-content/themes/vibe-kanban/images/nano.svg" alt="Nano Design Build Logo" width="50" height="50"/>
-			</figure>
-			<!-- /wp:image -->
-			<!-- wp:paragraph -->
-			<p><a href="/projects">View All Projects</a></p>
-			<!-- /wp:paragraph -->
-		</div>
-		<!-- /wp:group -->
-	</div>
-	<!-- /wp:group -->
+	</li>
+</ul>
+<!-- /wp:html -->
 </main>
 <!-- /wp:group -->
 
