@@ -430,3 +430,8 @@ body > footer {
     height: auto;
     margin-bottom: 2rem;
 }
+
+/*--------------------------------------------------------------
+# 1.2.1 - Front Page Parity Fix
+--------------------------------------------------------------*/
+.work-loop{list-style:none;margin:0;padding:0}.work-row{display:flex;align-items:center;gap:0}.work-text,.work-image{flex:1 1 50%}.work-row .wp-block-columns{gap:0} .work-link{display:inline-block;text-decoration:none;transition:color .2s ease,transform .2s ease,opacity .2s ease}.work-image img{display:block;transition:transform .25s ease,opacity .25s ease}.work-row:hover .work-image img{transform:translateY(-2px) scale(1.02);opacity:.96}.work-row:hover .work-text h2{text-decoration:underline}
