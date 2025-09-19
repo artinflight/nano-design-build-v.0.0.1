@@ -226,6 +226,35 @@ body > footer {
 }
 
 /*--------------------------------------------------------------
+# Standard Pages (page-about.php, page-contact.php)
+--------------------------------------------------------------*/
+.site-main-standard {
+    max-width: 800px;
+    margin: 6rem auto;
+    padding: 0 2rem;
+}
+
+.entry-header-standard {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.entry-title-standard {
+    font-size: 52px;
+}
+
+.entry-content-standard {
+    font-size: 20px;
+    line-height: 1.7;
+}
+
+.static-contact-info {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid #eee;
+}
+
+/*--------------------------------------------------------------
 # Magazine Spread Single Project Layout (Sticky Image)
 --------------------------------------------------------------*/
 
