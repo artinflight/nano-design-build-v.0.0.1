@@ -283,6 +283,23 @@ body > footer {
     letter-spacing: 0.5px;
 }
 
+.project-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid #eee;
+}
+
+.project-navigation a {
+    font-family: monospace;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    max-width: 45%;
+}
+
+
 .site-footer-condensed {
     margin-top: 4rem;
     padding-top: 2rem;
