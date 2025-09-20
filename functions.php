@@ -121,6 +121,11 @@ if ( ! function_exists( 'nanodesignbuild_setup' ) ) :
             'show_in_rest'          => true,
         );
         register_taxonomy( 'style', 'project', $style_args );
+
+        // 4. --- REGISTER NAVIGATION MENUS ---
+        register_nav_menus( array(
+            'primary' => __( 'Primary Menu', 'nanodesignbuild' ),
+        ) );
     }
 endif;
 add_action( 'init', 'nanodesignbuild_setup' );
@@ -144,13 +149,18 @@ function nanodesignbuild_scripts() {
     // Enqueue Stylesheet
     wp_enqueue_style( 'nanodesignbuild-style', get_stylesheet_uri() );
 
-    // Only load special homepage scripts on the front page
-    if ( is_front_page() ) {
-        // Enqueue the new script to fix hero height
-        wp_enqueue_script( 'nanodesignbuild-hero-height', get_template_directory_uri() . '/js/hero-height.js', array(), '1.0.0', true );
-        
-        // Enqueue the script for horizontal scrolling
-        wp_enqueue_script( 'nanodesignbuild-horizontal-scroll', get_template_directory_uri() . '/js/horizontal-scroll.js', array(), '1.0.0', true );
-    }
+    // Enqueue the new script to fix hero height
+    wp_enqueue_script( 'nanodesignbuild-hero-height', get_template_directory_uri() . '/js/hero-height.js', array(), '1.0.0', true );
+    
+    // Enqueue the script for horizontal scrolling
+    wp_enqueue_script( 'nanodesignbuild-horizontal-scroll', get_template_directory_uri() . '/js/horizontal-scroll.js', array(), '1.0.0', true );
+
+    // Enqueue the mobile menu script
+    wp_enqueue_script( 'nanodesignbuild-mobile-menu', get_template_directory_uri() . '/js/mobile-menu.js', array(), '1.0.0', true );
 }
 add_action( 'wp_enqueue_scripts', 'nanodesignbuild_scripts' );
+
+/**
+ * Programmatically create the primary navigation menu.
+ */
+require_once get_template_directory() . '/setup-menu.php';

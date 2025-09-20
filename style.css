@@ -67,6 +67,145 @@ img {
 }
 
 /*--------------------------------------------------------------
+# Header & Navigation
+--------------------------------------------------------------*/
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 1.5rem 2rem;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.site-header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.site-logo img {
+    height: 40px;
+    width: auto;
+}
+
+.primary-menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.primary-menu li {
+    margin-left: 2rem;
+}
+
+.primary-menu a {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 1px;
+    font-weight: 500;
+    color: #333;
+}
+
+/* Active menu item */
+.primary-menu .current-menu-item a {
+    border-bottom: 2px solid #333;
+}
+
+/* Header background logic */
+.home .site-header {
+    background-color: transparent;
+}
+
+.home .site-header .primary-menu a {
+    color: #fff;
+}
+
+.home .site-header .current-menu-item a {
+    border-bottom-color: #fff;
+}
+
+.site-header:not(.home-header) {
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
+}
+
+/* Mobile Menu Toggle */
+.mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.mobile-menu-toggle .icon-bar {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background-color: #333;
+    margin: 4px 0;
+    transition: transform 0.3s ease-in-out;
+}
+
+.home .mobile-menu-toggle .icon-bar {
+    background-color: #fff;
+}
+
+/* Responsive Mobile Navigation */
+@media (max-width: 768px) {
+    .primary-nav {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.98);
+        z-index: 999;
+    }
+
+    .primary-nav.is-open {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .primary-menu {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .primary-menu li {
+        margin: 1rem 0;
+    }
+
+    .primary-menu a {
+        font-size: 24px;
+        color: #333;
+    }
+    
+    .home .site-header .primary-menu a {
+        color: #333;
+    }
+
+    .mobile-menu-toggle {
+        display: block;
+        z-index: 1001;
+    }
+}
+
+/* No scroll on mobile menu open */
+.no-scroll {
+    overflow: hidden;
+}
+
+/*--------------------------------------------------------------
 # Header & Footer
 --------------------------------------------------------------*/
 body > header {
