@@ -82,7 +82,7 @@ the_post();
       <!-- Partner: Titka -->
       <article class="partner">
         <figure class="partner-photo">
-          <img src="/wp-content/uploads/2025/07/placeholder-headshot-portrait.jpg" alt="Portrait of Titka Safarzadeh" />
+          <img src="https://picsum.photos/id/550/200" alt="Portrait of Titka Safarzadeh" />
         </figure>
         <div class="partner-body">
           <h3 class="partner-name">Titka Safarzadeh</h3>
@@ -95,7 +95,7 @@ the_post();
       <!-- Partner: Saied -->
       <article class="partner">
         <figure class="partner-photo">
-          <img src="/wp-content/uploads/2025/07/placeholder-headshot-portrait.jpg" alt="Portrait of Saied Mahboubi" />
+          <img src="https://picsum.photos/id/433/200" alt="Portrait of Saied Mahboubi" />
         </figure>
         <div class="partner-body">
           <h3 class="partner-name">Saied Mahboubi</h3>
