@@ -125,6 +125,15 @@ if ( ! function_exists( 'nanodesignbuild_setup' ) ) :
 endif;
 add_action( 'init', 'nanodesignbuild_setup' );
 
+function nanodesignbuild_register_menus() {
+    register_nav_menus(
+        array(
+            'primary-menu' => __( 'Primary Menu', 'nanodesignbuild' ),
+        )
+    );
+}
+add_action( 'init', 'nanodesignbuild_register_menus' );
+
 /**
  * Flush rewrite rules on theme activation.
  */
@@ -144,6 +153,9 @@ function nanodesignbuild_scripts() {
     // Enqueue Stylesheet
     wp_enqueue_style( 'nanodesignbuild-style', get_stylesheet_uri() );
 
+    // Enqueue Navigation Script
+    wp_enqueue_script( 'nanodesignbuild-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '1.0.0', true );
+
     // Only load special homepage scripts on the front page
     if ( is_front_page() ) {
         // Enqueue the new script to fix hero height
@@ -154,3 +166,12 @@ function nanodesignbuild_scripts() {
     }
 }
 add_action( 'wp_enqueue_scripts', 'nanodesignbuild_scripts' );
+
+// Add body class for front page
+function nanodesignbuild_body_classes( $classes ) {
+    if ( is_front_page() ) {
+        $classes[] = 'is-front-page';
+    }
+    return $classes;
+}
+add_filter( 'body_class', 'nanodesignbuild_body_classes' );

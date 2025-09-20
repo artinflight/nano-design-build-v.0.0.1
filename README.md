@@ -10,9 +10,9 @@ This project is the development of a custom portfolio website for Nano Green Dot
 
 ## 2. Project Status
 
-**Progress:** 0/15 Tasks Complete
+**Progress:** 1/15 Tasks Complete
 
-`[..............................]` 0%
+`[==............................]` 7%
 
 ---
 
@@ -76,6 +76,7 @@ The project will be developed in four distinct phases.
 * [ ] **1.1:** Initialize Git repository and project structure.
 * [ ] **1.2:** Clean and prepare the `v.0.0.1` theme files into the new "nano-design-build" theme structure.
 * [ ] **1.3:** Define global styles and fonts in `theme.json`.
+* [x] **1.2.4:** Navigation Enhancements.
 
 ### Phase 2: Core Page & Template Construction
 
@@ -102,4 +103,5 @@ The project will be developed in four distinct phases.
 
 ## 6. Changelog
 
+* **2025-09-20:** Completed Task 1.2.4: Navigation Enhancements.
 * **2025-08-27:** Project Initialized. Roadmap and protocols established.
