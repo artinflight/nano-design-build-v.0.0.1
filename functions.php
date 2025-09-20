@@ -154,3 +154,31 @@ function nanodesignbuild_scripts() {
     }
 }
 add_action( 'wp_enqueue_scripts', 'nanodesignbuild_scripts' );
+
+// Menu + logo support (safe if called multiple times)
+add_action( 'after_setup_theme', function () {
+	add_theme_support( 'custom-logo', array(
+		'height'      => 120,
+		'width'       => 120,
+		'flex-width'  => true,
+		'flex-height' => true,
+	) );
+	register_nav_menus( array(
+		'primary' => __( 'Primary Menu', 'nano-design-build' ),
+	) );
+} );
+
+// Rewrite legacy nano-design-build-v1.test upload URLs to this site's base URL at render time.
+add_filter('the_content', function ($content) {
+    $home = home_url();
+    // Only touch links under /wp-content/uploads/ to avoid unintended changes.
+    $content = preg_replace(
+        '#https?://nano-design-build-v1\.test(/wp-content/uploads/[^"\'\s<>]+)#i',
+        $home . '$1',
+        $content
+    );
+    return $content;
+}, 20);
+
+// Disable the admin bar on the front-end for all logged-in users.
+add_filter( 'show_admin_bar', '__return_false' );

@@ -6,8 +6,12 @@
 get_header(); ?>
 
 <section class="hero-video-section">
-    <video playsinline autoplay muted loop poster="YOUR_POSTER_IMAGE_URL.jpg" class="hero-video-bg">
-        <source src="http://nano-design-build-v1.test/wp-content/uploads/2025/07/250705-NanoGreenDot-NanoBackgroundVideo.mp4" type="video/mp4">
+    <?php
+    $video_rel = '/wp-content/uploads/2025/07/250705-NanoGreenDot-NanoBackgroundVideo.mp4';
+    $video_url = esc_url( home_url( $video_rel ) );
+    ?>
+    <video class="hero-video-bg" playsinline autoplay muted loop>
+        <source src="<?php echo $video_url; ?>" type="video/mp4">
     </video>
     <div class="hero-overlay"></div>
     <div class="hero-content">

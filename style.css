@@ -89,6 +89,49 @@ body > footer {
     color: #999;
 }
 
+/* --- Magazine header --- */
+.site-header {
+	position: sticky; top: 0; z-index: 1000;
+	background: #fff; border-bottom: 1px solid rgba(0,0,0,.06);
+	transition: background .2s ease, border-color .2s ease, backdrop-filter .2s ease;
+}
+.is-front .site-header {
+	position: fixed; width: 100%;
+	background: rgba(255,255,255,.08); border-color: transparent;
+	backdrop-filter: saturate(160%) blur(8px);
+}
+.nav-inner {
+	max-width: 1200px; margin: 0 auto; padding: 16px 24px;
+	display: flex; align-items: center; justify-content: space-between; gap: 24px;
+}
+.brand { display: inline-flex; align-items: center; text-decoration: none; }
+.brand img { height: 36px; width: auto; }
+.brand-text { font-weight: 700; letter-spacing: .02em; }
+
+.nav-primary .menu { display: flex; gap: 28px; list-style: none; margin: 0; padding: 0; }
+.nav-primary a {
+	text-decoration: none; font-weight: 500; letter-spacing: .03em;
+	text-transform: uppercase; font-size: 14px; line-height: 1;
+	padding: 6px 0; border-bottom: 2px solid transparent;
+	transition: color .2s ease, border-color .2s ease, opacity .2s ease;
+}
+.nav-primary a:hover { border-color: currentColor; }
+
+/* Mobile */
+.nav-toggle { display: none; background: none; border: 0; padding: 6px; }
+.nav-toggle .nav-toggle-bar { display: block; width: 22px; height: 2px; margin: 4px 0; background: currentColor; }
+@media (max-width: 900px) {
+	.nav-toggle { display: inline-block; }
+	.nav-primary { position: absolute; right: 24px; top: 64px; background: #fff; border: 1px solid rgba(0,0,0,.08); padding: 12px 18px; display: none; }
+	.is-front .nav-primary { background: rgba(255,255,255,.98); backdrop-filter: blur(6px); }
+	.nav-primary .menu { flex-direction: column; gap: 12px; }
+	.nav-primary.is-open { display: block; }
+}
+
+/* Ensure hero video isn't pushed down by fixed header on front page */
+.is-front body { /* no-op; fixed header overlays hero */ }
+body:not(.is-front) { scroll-padding-top: 72px; } /* nice anchor jump behavior */
+
 
 /*--------------------------------------------------------------
 # Magazine Style Project Archive
