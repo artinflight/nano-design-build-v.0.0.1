@@ -186,3 +186,83 @@ add_filter('the_content', function ($content) {
 
 // Disable the admin bar on the front-end for all logged-in users.
 add_filter( 'show_admin_bar', '__return_false' );
+
+/**
+ * NDB Contact Form handler (AJAX + non-AJAX)
+ */
+add_action('wp_ajax_ndb_contact', 'ndb_handle_contact');
+add_action('wp_ajax_nopriv_ndb_contact', 'ndb_handle_contact');
+
+function ndb_handle_contact(){
+  // Nonce
+  $nonce = isset($_POST['_ndb_nonce']) ? sanitize_text_field($_POST['_ndb_nonce']) : '';
+  if (! wp_verify_nonce($nonce, 'ndb_contact_nonce')) {
+    return ndb_contact_fail('Invalid security token. Please refresh and try again.');
+  }
+
+  // Honeypot
+  if (!empty($_POST['website'])) {
+    return ndb_contact_fail('Spam detected.');
+  }
+
+  // Fields
+  $name    = isset($_POST['name'])    ? trim(wp_strip_all_tags($_POST['name'])) : '';
+  $email   = isset($_POST['email'])   ? sanitize_email($_POST['email']) : '';
+  $phone   = isset($_POST['phone'])   ? trim(wp_strip_all_tags($_POST['phone'])) : '';
+  $message = isset($_POST['message']) ? trim(wp_kses_post($_POST['message'])) : '';
+  $to      = isset($_POST['_ndb_recipient']) ? sanitize_email($_POST['_ndb_recipient']) : get_option('admin_email');
+
+  if ($name==='' || $email==='' || $message==='') {
+    return ndb_contact_fail('Please complete all required fields.');
+  }
+  if (!is_email($email)) {
+    return ndb_contact_fail('Please enter a valid email address.');
+  }
+
+  // Compose
+  $subject = sprintf('[NDB Site] Message from %s', $name);
+  $body    = "Name: $name\nEmail: $email\nPhone: $phone\n\nMessage:\n$message\n";
+  $headers = array('Reply-To: '.$name.' <'.$email.'>');
+
+  // Send
+  $sent = wp_mail($to, $subject, $body, $headers);
+
+  // AJAX vs non-AJAX
+  if (defined('DOING_AJAX') && DOING_AJAX) {
+    if ($sent) {
+      wp_send_json_success(array('message' => 'Message sent.'));
+    } else {
+      ndb_contact_fail('Could not send email. Please try again later.');
+    }
+  } else {
+    // fallback: redirect back to contact page with query param
+    $url = add_query_arg( $sent ? 'ndb_sent=1' : 'ndb_error=1', wp_get_referer() ?: home_url('/contact/') );
+    wp_safe_redirect($url);
+    exit;
+  }
+}
+
+function ndb_contact_fail($msg){
+  if (defined('DOING_AJAX') && DOING_AJAX) {
+    wp_send_json_error(array('message' => $msg), 400);
+  } else {
+    $url = add_query_arg('ndb_error=1', wp_get_referer() ?: home_url('/contact/') );
+    wp_safe_redirect($url);
+    exit;
+  }
+}
+
+/**
+ * Optional: Customizer settings to manage recipient/phone/address without code
+ */
+add_action('customize_register', function($wp_customize){
+  $wp_customize->add_section('ndb_contact', array(
+    'title' => __('Contact Details','nanodesignbuild'), 'priority'=>30
+  ));
+  $wp_customize->add_setting('ndb_contact_recipient', array('default'=>get_option('admin_email'), 'sanitize_callback'=>'sanitize_email'));
+  $wp_customize->add_control('ndb_contact_recipient', array('label'=>__('Form recipient email','nanodesignbuild'), 'section'=>'ndb_contact', 'type'=>'email'));
+  $wp_customize->add_setting('ndb_contact_phone', array('sanitize_callback'=>'sanitize_text_field'));
+  $wp_customize->add_control('ndb_contact_phone', array('label'=>__('Public phone','nanodesignbuild'), 'section'=>'ndb_contact', 'type'=>'text'));
+  $wp_customize->add_setting('ndb_contact_address', array('sanitize_callback'=>'wp_kses_post'));
+  $wp_customize->add_control('ndb_contact_address', array('label'=>__('Address (multiline OK)','nanodesignbuild'), 'section'=>'ndb_contact', 'type'=>'textarea'));
+});
