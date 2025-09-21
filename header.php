@@ -30,7 +30,7 @@
 			<span class="screen-reader-text">Menu</span>
 		</button>
 
-		<nav id="primary-menu" class="nav-primary" role="navigation" aria-label="<?php esc_attr_e( 'Primary', 'nano-design-build' ); ?>">
+		<nav id="primary-menu" class="nav-primary site-nav-minimal" role="navigation" aria-label="<?php esc_attr_e( 'Primary', 'nano-design-build' ); ?>">
 			<?php
 			// Prefer a WP menu named/assigned to 'primary'; otherwise fall back to hardcoded items.
 			if ( has_nav_menu( 'primary' ) ) {
@@ -46,7 +46,8 @@
 				$work_url = get_post_type_archive_link( 'project' );
 				?>
 				<ul class="menu">
-					<li><a href="<?php echo esc_url( $work_url ); ?>">Work</a></li>
+                    <li><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a></li>
+					<li><a href="<?php echo esc_url( $projects_url ); ?>">Projects</a></li>
 					<li><a href="<?php echo esc_url( home_url( '/about/' ) ); ?>">About</a></li>
 					<li><a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">Contact</a></li>
 				</ul>

@@ -58,11 +58,15 @@ if ( ! function_exists( 'nanodesignbuild_setup' ) ) :
             'show_in_admin_bar'     => true,
             'show_in_nav_menus'     => true,
             'can_export'            => true,
-            'has_archive'           => true,
+            'has_archive'           => 'projects',
             'exclude_from_search'   => false,
             'publicly_queryable'    => true,
             'capability_type'       => 'page',
             'show_in_rest'          => true,
+            'rewrite'               => array(
+                'slug'       => 'projects',                          // ← singles at /projects/<project>
+                'with_front' => false
+            ),           
         );
         register_post_type( 'project', $project_args );
 

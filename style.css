@@ -69,68 +69,126 @@ img {
 /*--------------------------------------------------------------
 # Header & Footer
 --------------------------------------------------------------*/
-body > header {
-    padding: 2rem;
-    border-bottom: 1px solid #eee;
-}
 
-body > header h1 {
-    margin: 0;
-    font-size: 24px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
+/* Footer (baseline) */
 body > footer {
-    text-align: center;
-    padding: 2rem;
-    border-top: 1px solid #eee;
-    font-size: 14px;
-    color: #999;
+  text-align: center;
+  padding: 2rem;
+  border-top: 1px solid #eee;
+  font-size: 14px;
+  color: #999;
 }
 
-/* --- Magazine header --- */
+/* ---------------------------
+   Header: defaults (ALL pages)
+   --------------------------- */
 .site-header {
-	position: sticky; top: 0; z-index: 1000;
-	background: #fff; border-bottom: 1px solid rgba(0,0,0,.06);
-	transition: background .2s ease, border-color .2s ease, backdrop-filter .2s ease;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #fff;
+  border-bottom: 1px solid rgba(0,0,0,.06);
+  transition: background .25s ease, border-color .25s ease, box-shadow .25s ease, padding .25s ease;
 }
-.is-front .site-header {
-	position: fixed; width: 100%;
-	background: rgba(255,255,255,.08); border-color: transparent;
-	backdrop-filter: saturate(160%) blur(8px);
-}
+
+/* Standard header row layout */
 .nav-inner {
-	max-width: 1200px; margin: 0 auto; padding: 16px 24px;
-	display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 24px; /* default size for EVERY non-front page */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
 }
-.brand { display: inline-flex; align-items: center; text-decoration: none; }
+
+/* Brand + menu text inherit current colour */
+.brand { display: inline-flex; align-items: center; text-decoration: none; color: inherit; }
 .brand img { height: 36px; width: auto; }
-.brand-text { font-weight: 700; letter-spacing: .02em; }
+.brand-text { font-weight: 700; letter-spacing: .02em; color: inherit; }
 
 .nav-primary .menu { display: flex; gap: 28px; list-style: none; margin: 0; padding: 0; }
 .nav-primary a {
-	text-decoration: none; font-weight: 500; letter-spacing: .03em;
-	text-transform: uppercase; font-size: 14px; line-height: 1;
-	padding: 6px 0; border-bottom: 2px solid transparent;
-	transition: color .2s ease, border-color .2s ease, opacity .2s ease;
+  text-decoration: none; font-weight: 500; letter-spacing: .03em;
+  text-transform: uppercase; font-size: 14px; line-height: 1;
+  padding: 6px 0; border-bottom: 2px solid transparent;
+  transition: color .2s ease, border-color .2s ease, opacity .2s ease;
+  color: inherit;
 }
 .nav-primary a:hover { border-color: currentColor; }
 
 /* Mobile */
-.nav-toggle { display: none; background: none; border: 0; padding: 6px; }
+.nav-toggle { display: none; background: none; border: 0; padding: 6px; color: inherit; }
 .nav-toggle .nav-toggle-bar { display: block; width: 22px; height: 2px; margin: 4px 0; background: currentColor; }
+
 @media (max-width: 900px) {
-	.nav-toggle { display: inline-block; }
-	.nav-primary { position: absolute; right: 24px; top: 64px; background: #fff; border: 1px solid rgba(0,0,0,.08); padding: 12px 18px; display: none; }
-	.is-front .nav-primary { background: rgba(255,255,255,.98); backdrop-filter: blur(6px); }
-	.nav-primary .menu { flex-direction: column; gap: 12px; }
-	.nav-primary.is-open { display: block; }
+  .nav-toggle { display: inline-block; }
+  .nav-primary {
+    position: absolute; right: 24px; top: 64px;
+    background: #fff; border: 1px solid rgba(0,0,0,.08); padding: 12px 18px; display: none;
+    z-index: 3100;
+  }
+  .nav-primary .menu { flex-direction: column; gap: 12px; }
+  .nav-primary.is-open { display: block; }
 }
 
-/* Ensure hero video isn't pushed down by fixed header on front page */
-.is-front body { /* no-op; fixed header overlays hero */ }
-body:not(.is-front) { scroll-padding-top: 72px; } /* nice anchor jump behavior */
+/* =========================================================
+   FRONT PAGE ONLY (your helper adds .is-front to <body>)
+   - No scaling. Only padding & background change on scroll.
+   - Menu sits INSIDE the header row on the front page.
+   ========================================================= */
+
+/* Make the header overlay the hero on the front page */
+.is-front .site-header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  width: 100%;
+  z-index: 2000;
+  border-bottom-color: transparent;
+  background: transparent;
+  box-shadow: none;
+}
+
+/* Compact while hero is visible (just tighter padding) */
+.is-front.home-hero .nav-inner {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: #fff;
+}
+.is-front.home-hero .site-header { background: transparent; box-shadow: none; }
+.is-front.home-hero .brand,
+.is-front.home-hero .brand .brand-text,
+.is-front.home-hero .nav-primary a { color: #fff; }
+
+/* Expanded after hero (full padding + readable bg) */
+.is-front.home-below-hero .nav-inner {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  color: #111;
+}
+.is-front.home-below-hero .site-header {
+  background: rgba(255,255,255,.95);
+  border-bottom-color: rgba(0,0,0,.06);
+  box-shadow: 0 8px 24px rgba(0,0,0,.06);
+}
+.is-front.home-below-hero .brand,
+.is-front.home-below-hero .brand .brand-text,
+.is-front.home-below-hero .nav-primary a { color: #111; }
+
+/* On the FRONT PAGE ONLY, ensure the menu lives inside the header row.
+   (Prevents any global "fixed" nav rules from yanking it to the top-right.) */
+.is-front .site-header .site-nav-minimal {
+  position: static !important;
+  top: auto !important;
+  right: auto !important;
+  z-index: auto !important;
+}
+
+/* Don’t let the hero overlay swallow clicks near edges */
+.is-front .hero-overlay { pointer-events: none; }
+
+/* Keep anchor jumps nice on all non-front pages */
+body:not(.is-front) { scroll-padding-top: 72px; }
 
 
 /*--------------------------------------------------------------
@@ -608,4 +666,40 @@ body:not(.is-front) { scroll-padding-top: 72px; } /* nice anchor jump behavior *
 }
 @media (prefers-reduced-motion: reduce) {
   .ap-row:hover .ap-media img { transform:none; opacity:1; }
+}
+
+/* === Fix: keep menu INSIDE the header row on non-front pages === */
+body:not(.is-front) .site-header .site-nav-minimal {
+  position: static !important;
+  top: auto !important;
+  right: auto !important;
+}
+
+body:not(.is-front) .nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* brand left, menu right */
+  gap: 24px;
+}
+
+/* Ensure horizontal layout for the WP menu on non-front pages */
+body:not(.is-front) .nav-primary .menu {
+  display: flex;
+  gap: 28px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Front page: nav link colours over hero vs below hero */
+.is-front.home-hero  .site-header .site-nav-minimal a,
+.is-front.home-hero  .site-header .nav-primary a {
+  color: #fff !important;
+  mix-blend-mode: normal !important;
+}
+
+.is-front.home-below-hero .site-header .site-nav-minimal a,
+.is-front.home-below-hero .site-header .nav-primary a {
+  color: #111 !important;
+  mix-blend-mode: normal !important;
 }
