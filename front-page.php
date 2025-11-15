@@ -46,17 +46,6 @@ get_header(); ?>
       </p>
     </section>
 
-    <!-- Services (sidebar card) -->
-    <aside class="home-ov__services" aria-labelledby="services-title">
-      <ul class="service-list">
-        <li><strong>Design</strong> – Feasibility, schematic options, 3D visualization.</li>
-        <li><strong>Approvals</strong> – Planning strategy, CoA applications, zoning and site plan.</li>
-        <li><strong>Documentation</strong> – DD/permit sets, coordination with structural, M/E.</li>
-        <li><strong>Build</strong> – Estimating, tendering, construction management, QA.</li>
-        <li><strong>Aftercare</strong> – Closeout, warranties, and support.</li>
-      </ul>
-    </aside>
-
     <!-- Notes & Press -->
     <section class="home-ov__press" aria-labelledby="press-title">
       <ul class="press-list">
@@ -165,8 +154,7 @@ get_header(); ?>
 }
 
 /* Columns */
-.home-ov__about{ grid-column: 1 / span 8; }
-.home-ov__services{ grid-column: 9 / -1; }
+.home-ov__about{ grid-column: 1 / -1; }
 
 /* About — image band above text */
 .home-ov__about .about-media{
@@ -178,20 +166,6 @@ get_header(); ?>
 .home-ov__about .about-media img{
   width:100%; height:100%; object-fit:cover; display:block;
 }
-
-/* Services card */
-.home-ov__services .service-list{
-  list-style:none; margin:0; padding:0;
-  border:1px solid rgba(0,0,0,.06); border-radius:14px; background:#fff;
-  box-shadow:0 10px 24px rgba(0,0,0,.05);
-}
-.home-ov__services .service-list li{
-  padding:14px 16px; border-top:1px solid rgba(0,0,0,.06);
-  color:#333; line-height:1.55;
-}
-.home-ov__services .service-list li:first-child{ border-top:none; border-radius:14px 14px 0 0; }
-.home-ov__services .service-list li:last-child { border-radius:0 0 14px 14px; }
-.home-ov__services .service-list strong{ color:#111; }
 
 /* Notes & Press */
 .home-ov__press{ grid-column: 1 / -1; padding-top: clamp(12px,2vw,18px); margin-top: clamp(22px,3.5vw,40px); }
@@ -233,7 +207,6 @@ get_header(); ?>
 /* Responsive stack */
 @media (max-width: 1000px){
   .home-ov__about{ grid-column: 1 / -1; }
-  .home-ov__services{ grid-column: 1 / -1; }
 }
 @media (max-width: 640px){
   .logo-roll figure{ min-height:26px; }
