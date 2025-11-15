@@ -130,6 +130,55 @@ endif;
 add_action( 'init', 'nanodesignbuild_setup' );
 
 /**
+ * Recognitions (timeline) – custom post type
+ * Slug: /recognitions/
+ */
+add_action('init', function () {
+
+  // Labels
+  $labels = [
+    'name'               => _x('Recognitions', 'Post type general name', 'nanodesignbuild'),
+    'singular_name'      => _x('Entry', 'Post type singular name', 'nanodesignbuild'),
+    'menu_name'          => _x('Recognitions', 'Admin Menu text', 'nanodesignbuild'),
+    'name_admin_bar'     => _x('Recognitions Entry', 'Add New on Toolbar', 'nanodesignbuild'),
+    'add_new'            => __('Add New', 'nanodesignbuild'),
+    'add_new_item'       => __('Add New Entry', 'nanodesignbuild'),
+    'edit_item'          => __('Edit Entry', 'nanodesignbuild'),
+    'new_item'           => __('New Entry', 'nanodesignbuild'),
+    'view_item'          => __('View Entry', 'nanodesignbuild'),
+    'all_items'          => __('All Entries', 'nanodesignbuild'),
+    'search_items'       => __('Search Recognitions', 'nanodesignbuild'),
+    'not_found'          => __('No entries found.', 'nanodesignbuild'),
+  ];
+
+  // CPT
+  register_post_type('journal', [
+    'labels'             => $labels,
+    'public'             => true,
+    'show_ui'            => true,
+    'show_in_menu'       => true,
+    'menu_icon'          => 'dashicons-welcome-write-blog',
+    'supports'           => ['title','editor','thumbnail','excerpt','revisions'],
+    'has_archive'        => true,
+    'rewrite'            => ['slug' => 'recognitions', 'with_front' => true],
+    'show_in_rest'       => true,
+  ]);
+
+  // Optional taxonomy for grouping (Process, Press, Awards, Milestones…)
+  register_taxonomy('journal_topic', ['journal'], [
+    'label'        => __('Topics', 'nanodesignbuild'),
+    'public'       => true,
+    'hierarchical' => false,
+    'rewrite'      => ['slug' => 'recognitions-topic'],
+    'show_in_rest' => true,
+  ]);
+
+  // Image size for timeline thumbnails (keeps rhythm)
+  add_image_size('recognitions-thumb', 1200, 750, true); // 16:10 crop
+});
+
+
+/**
  * Flush rewrite rules on theme activation.
  */
 function nanodesignbuild_rewrite_flush() {
@@ -146,7 +195,7 @@ add_action( 'after_switch_theme', 'nanodesignbuild_rewrite_flush' );
  */
 function nanodesignbuild_scripts() {
     // Enqueue Stylesheet
-    wp_enqueue_style( 'nanodesignbuild-style', get_stylesheet_uri() );
+    wp_enqueue_style( 'nanodesignbuild-style', get_stylesheet_uri(), [], '1.0.1'  );
 
     // Only load special homepage scripts on the front page
     if ( is_front_page() ) {
@@ -265,4 +314,19 @@ add_action('customize_register', function($wp_customize){
   $wp_customize->add_control('ndb_contact_phone', array('label'=>__('Public phone','nanodesignbuild'), 'section'=>'ndb_contact', 'type'=>'text'));
   $wp_customize->add_setting('ndb_contact_address', array('sanitize_callback'=>'wp_kses_post'));
   $wp_customize->add_control('ndb_contact_address', array('label'=>__('Address (multiline OK)','nanodesignbuild'), 'section'=>'ndb_contact', 'type'=>'textarea'));
+});
+
+// In functions.php
+add_filter('the_content_more_link', function($link){
+  if ( is_post_type_archive('recognitions') ) {
+    // strip the anchor & turn into plain text
+    return '';
+  }
+  return $link;
+});
+
+// functions.php
+add_filter('upload_mimes', function($mimes){
+    $mimes['svg'] = 'image/svg+xml';
+    return $mimes;
 });

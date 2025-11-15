@@ -101,7 +101,7 @@ get_header(); ?>
     <?php
     $args = array(
         'post_type'      => 'project',
-        'posts_per_page' => 3,
+        'posts_per_page' => 2,
         'orderby'        => 'date',
         'order'          => 'DESC',
     );
@@ -109,7 +109,7 @@ get_header(); ?>
     ?>
 
     <?php if ( $recent_projects->have_posts() ) : ?>
-        <h2 class="section-title">Recent Work</h2>
+        <h2 class="section-title">Featured Projects</h2>
         <div class="project-archive-list">
             <?php while ( $recent_projects->have_posts() ) : $recent_projects->the_post(); ?>
                 <article id="post-<?php the_ID(); ?>" <?php post_class('project-archive-item'); ?>>
@@ -132,8 +132,14 @@ get_header(); ?>
             <?php endwhile; wp_reset_postdata(); ?>
         </div>
         <div class="section-link">
-            <img src="<?php echo get_template_directory_uri(); ?>/images/nano.svg" alt="Nano Design Build Logo" class="final-card-logo">
-            <a href="<?php echo get_post_type_archive_link('project'); ?>">View All Projects</a>
+            <?php
+            $logo_id  = get_theme_mod( 'custom_logo' );
+            $logo_url = wp_get_attachment_image_url( $logo_id , 'full' );
+            ?>
+
+            <img src="<?php echo esc_url( $logo_url ); ?>" alt="Nano Design Build Logo" class="final-card-logo">
+
+            <a href="<?php echo get_post_type_archive_link('project'); ?>">View Featured Projects</a>
         </div>
     <?php endif; ?>
 </div>

@@ -13,15 +13,16 @@
 
 <header class="site-header" role="banner">
 	<div class="nav-inner">
-		<a class="brand" href="<?php echo esc_url( home_url( '/' ) ); ?>">
-			<?php
-			if ( function_exists( 'the_custom_logo' ) && has_custom_logo() ) {
-				the_custom_logo();
-			} else {
-				?><span class="brand-text"><?php bloginfo( 'name' ); ?></span><?php
-			}
-			?>
-		</a>
+		<?php if ( function_exists( 'the_custom_logo' ) && has_custom_logo() ) : ?>
+			<span class="brand">
+				<?php the_custom_logo(); ?>
+			</span>
+		<?php else : ?>
+			<a class="brand" href="<?php echo esc_url( home_url( '/' ) ); ?>">
+				<span class="brand-text"><?php bloginfo( 'name' ); ?></span>
+			</a>
+		<?php endif; ?>
+
 
 		<button class="nav-toggle" aria-controls="primary-menu" aria-expanded="false">
 			<span class="nav-toggle-bar"></span>

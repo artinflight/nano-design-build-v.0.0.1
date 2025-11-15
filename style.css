@@ -79,6 +79,167 @@ body > footer {
   color: #999;
 }
 
+/*--------------------------------------------------------------
+# Footer Layout
+--------------------------------------------------------------*/
+
+.site-footer {
+  background: #0a0a0a;
+  color: #e5e5e5;
+  padding: 3rem 2rem 1.5rem;
+  border-top: 1px solid #111;
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) repeat(4, minmax(0, 1.3fr));
+  gap: 2.5rem;
+  align-items: flex-start;
+}
+
+.footer-column {
+  font-size: 14px;
+}
+
+.footer-column--brand {
+  font-size: 14px;
+}
+
+.footer-logo {
+  max-height: 40px;
+  width: auto;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.footer-logo-link:hover {
+  opacity: 0.85;
+}
+
+.footer-tagline {
+  margin: 0;
+  color: #aaa;
+  font-size: 13px;
+}
+
+.footer-heading {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  font-weight: 500;
+  margin: 0 0 0.75rem;
+  color: #f0f0f0;
+}
+
+.footer-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-list li + li {
+  margin-top: 0.4rem;
+}
+
+.footer-list a {
+  color: #e5e5e5;
+  text-decoration: none;
+}
+
+.footer-list a:hover {
+  color: #ffffff;
+}
+
+.footer-list-empty {
+  color: #777;
+}
+
+.footer-column--contact a {
+  color: #e5e5e5;
+  text-decoration: none;
+}
+
+.footer-column--contact a:hover {
+  text-decoration: underline;
+}
+
+.footer-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.footer-menu li + li {
+  margin-top: 0.4rem;
+}
+
+.footer-menu a {
+  font-size: 14px;
+  text-transform: none;
+  letter-spacing: .02em;
+  color: #e5e5e5;
+  text-decoration: none;
+}
+
+.footer-menu a:hover {
+  color: #ffffff;
+}
+
+.footer-bottom {
+  max-width: 1200px;
+  margin: 2rem auto 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid #181818;
+  text-align: left;
+  font-size: 12px;
+  color: #777;
+}
+
+/* Extra breathing room between menus and copyright on desktop */
+@media (min-width: 901px) {
+  .footer-bottom {
+    margin-top: 8rem;   /* was 2rem – adds whitespace below menus */
+  }
+}
+
+/* Responsive footer */
+@media (max-width: 900px) {
+  .footer-inner {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .footer-column--brand {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 600px) {
+  .footer-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-bottom {
+    text-align: center;
+  }
+}
+
+.footer-column--brand {
+  font-size: 12px;          /* was 14px */
+  text-align: center;
+}
+
+.footer-logo {
+  max-height: 32px;         /* was 40px */
+  width: auto;
+  display: block;
+  margin: 0 auto 0.75rem;   /* a bit tighter */
+  filter: invert(1) brightness(200%);
+}
+
+
 /* ---------------------------
    Header: defaults (ALL pages)
    --------------------------- */
@@ -90,6 +251,12 @@ body > footer {
   border-bottom: 1px solid rgba(0,0,0,.06);
   transition: background .25s ease, border-color .25s ease, box-shadow .25s ease, padding .25s ease;
 }
+
+/* Make the logo white in the front-page hero */
+.is-front.home-hero .custom-logo {
+    filter: invert(1) brightness(200%);
+}
+
 
 /* Standard header row layout */
 .nav-inner {
@@ -109,12 +276,18 @@ body > footer {
 
 .nav-primary .menu { display: flex; gap: 28px; list-style: none; margin: 0; padding: 0; }
 .nav-primary a {
-  text-decoration: none; font-weight: 500; letter-spacing: .03em;
-  text-transform: uppercase; font-size: 14px; line-height: 1;
-  padding: 6px 0; border-bottom: 2px solid transparent;
+  text-decoration: none;
+  font-weight: 500;
+  letter-spacing: .02em;
+  text-transform: none;        /* sentence/title case instead of ALL CAPS */
+  font-size: 16px;
+  line-height: 1.3;
+  padding: 8px 0;
+  border-bottom: 2px solid transparent;
   transition: color .2s ease, border-color .2s ease, opacity .2s ease;
   color: inherit;
 }
+
 .nav-primary a:hover { border-color: currentColor; }
 
 /* Mobile */
@@ -122,15 +295,59 @@ body > footer {
 .nav-toggle .nav-toggle-bar { display: block; width: 22px; height: 2px; margin: 4px 0; background: currentColor; }
 
 @media (max-width: 900px) {
-  .nav-toggle { display: inline-block; }
-  .nav-primary {
-    position: absolute; right: 24px; top: 64px;
-    background: #fff; border: 1px solid rgba(0,0,0,.08); padding: 12px 18px; display: none;
-    z-index: 3100;
+  .nav-toggle {
+    display: inline-block;
+    background: none;
+    border: 0;
+    padding: 6px;
+    color: inherit;
   }
-  .nav-primary .menu { flex-direction: column; gap: 12px; }
-  .nav-primary.is-open { display: block; }
+
+  /* Mobile menu panel */
+  .nav-primary {
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    top: 64px;
+    background: rgba(0, 0, 0, 0.94);
+    border-radius: 10px;
+    padding: 16px 20px 18px;
+    z-index: 3100;
+
+    /* animation */
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none;
+    transition:
+      max-height 0.25s ease,
+      opacity 0.25s ease,
+      transform 0.25s ease;
+  }
+
+  /* When menu is open (class added by your JS) */
+  .nav-primary.is-open {
+    max-height: 320px; /* enough for your links */
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .nav-primary .menu {
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .nav-primary .menu > li > a {
+    color: #fff;
+    font-size: 16px;
+    text-transform: none;
+    letter-spacing: .02em;
+  }
 }
+
+
 
 /* =========================================================
    FRONT PAGE ONLY (your helper adds .is-front to <body>)
@@ -294,6 +511,22 @@ body:not(.is-front) { scroll-padding-top: 72px; }
         text-align: left; /* Reset text alignment */
         padding-left: 0;
     }
+}
+
+/* Projects archive: make header 50% width on large screens */
+.post-type-archive-project .page-header{
+  margin: 0 auto 32px;          /* keep it centered; adjust bottom space as needed */
+  padding: 0 24px;
+}
+
+@media (min-width: 1000px){
+  .post-type-archive-project .page-header{
+    width: 50%;
+    max-width: 72ch;            /* guards against super wide monitors */
+  }
+  .post-type-archive-project .page-header .page-subtitle{
+    line-height: 1.6;
+  }
 }
 
 /*--------------------------------------------------------------
@@ -560,15 +793,15 @@ body:not(.is-front) { scroll-padding-top: 72px; }
     z-index: 1000; /* Ensure it's on top of everything */
 }
 
-.site-nav-minimal a {
+/*.site-nav-minimal a {
     font-family: monospace;
     text-transform: uppercase;
     font-size: 14px;
     letter-spacing: 0.5px;
     color: #333;
     mix-blend-mode: difference; /* This makes the text invert color based on the background */
-    font-weight: bold;
-}
+   /* font-weight: bold;
+}*/
 
 /*--------------------------------------------------------------
 # Homepage Final Card Logo
@@ -702,4 +935,313 @@ body:not(.is-front) .nav-primary .menu {
 .is-front.home-below-hero .site-header .nav-primary a {
   color: #111 !important;
   mix-blend-mode: normal !important;
+}
+
+/* ------------------------------------------------------------
+   JOURNAL (CPT) — vertical timeline (clean + fixed)
+   ------------------------------------------------------------ */
+
+/* Page container (keep site width) */
+.post-type-archive-journal .site-main {
+  max-width: 1120px;            /* match the rest of the site */
+  margin: 0 auto;
+  padding: clamp(18px, 3vw, 32px) 24px;
+}
+
+/* Timeline root + rail */
+.timeline,
+.journal-timeline {
+  --rail-x: 56px;                        /* rail from container left */
+  --left-col: calc(var(--rail-x) * 2);   /* width of date+dot column */
+  position: relative;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.timeline::before,
+.journal-timeline::before {
+  content: "";
+  position: absolute;
+  left: var(--rail-x);
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: rgba(0,0,0,.08);
+}
+
+/* Every journal item is a grid row (no display:contents) */
+.timeline > li,
+.journal-timeline > li {
+  display: grid !important;
+  grid-template-columns: var(--left-col) 1fr !important;
+  column-gap: clamp(18px, 3vw, 32px);
+  align-items: start;
+  position: relative;               /* anchor for .dot */
+  margin: clamp(12px, 2vw, 18px) 0;
+}
+
+/* Date label (left column) */
+.timeline > li > :is(.time, time, .jt-date, .timeline-date, .posted-on),
+.journal-timeline > li > :is(.time, time, .jt-date, .timeline-date, .posted-on) {
+  grid-column: 1 !important;
+  margin: 6px 0 0 !important;       /* sits just below the dot */
+  padding: 0 !important;
+  color: rgba(0,0,0,.55);
+  font-size: 13px;
+  letter-spacing: .06em;
+}
+
+/* One dot per item, centered on the rail */
+.timeline .dot,
+.journal-timeline .dot {
+  position: absolute;
+  left: calc(var(--rail-x) - 5px);   /* 10px dot → -5px to center */
+  top: .45rem;                       /* tweak to taste */
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #111;
+  box-shadow: 0 0 0 3px #fff;
+  z-index: 2;
+}
+
+/* Card (right column) */
+.timeline > li > :is(.card, article, .timeline-card),
+.journal-timeline > li > :is(.card, article, .timeline-card) {
+  grid-column: 2 !important;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,.08);
+  border-radius: 14px;
+  box-shadow: 0 10px 24px rgba(0,0,0,.05);
+  padding: clamp(14px, 2.2vw, 22px);
+  display: grid;
+  grid-template-columns: 280px 1fr;      /* thumb / copy */
+  gap: clamp(12px, 2vw, 20px);
+}
+
+/* No-thumb variant (fallback) */
+.timeline > li > :is(.card, .timeline-card).no-thumb,
+.journal-timeline > li > :is(.card, .timeline-card).no-thumb {
+  grid-template-columns: 1fr;
+}
+
+/* Media — keep natural aspect, no forced height */
+.timeline .media,
+.journal-timeline .media {
+  display: block;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.timeline .media img,
+.journal-timeline .media img {
+  display: block;
+  width: 100%;
+  height: auto;                      /* <- critical: no stretching */
+  object-fit: cover;                 /* crops only when oversized */
+}
+
+/* Type */
+.timeline :is(h2, h3, .entry-title),
+.journal-timeline :is(h2, h3, .entry-title) {
+  font-size: clamp(20px, 2.4vw, 26px);
+  line-height: 1.2;
+  margin: 2px 0 6px;
+  letter-spacing: .01em;
+}
+.timeline :is(p, .entry-content p),
+.journal-timeline :is(p, .entry-content p) {
+  margin: 0 0 10px;
+  color: #333;
+  line-height: 1.62;
+  max-width: 66ch;
+}
+
+/* Links line */
+.timeline .journal-sources,
+.journal-timeline .journal-sources {
+  margin-top: 4px;
+  font-size: 14px;
+  color: #444;
+}
+.timeline .journal-sources a,
+.journal-timeline .journal-sources a {
+  text-decoration: none;
+  border-bottom: 1px solid rgba(0,0,0,.15);
+}
+.timeline .journal-sources a:hover,
+.journal-timeline .journal-sources a:hover {
+  border-color: currentColor;
+}
+
+/* Mobile */
+@media (max-width: 780px) {
+  .timeline,
+  .journal-timeline {
+    --rail-x: 12px;
+    --left-col: 24px;
+  }
+  .timeline > li,
+  .journal-timeline > li {
+    grid-template-columns: var(--left-col) 1fr !important;
+  }
+  .timeline > li > :is(.card, article, .timeline-card),
+  .journal-timeline > li > :is(.card, article, .timeline-card) {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Journal archive – keep normal site width */
+.post-type-archive-journal .site-main,
+.post-type-archive-journal .site-content,
+.post-type-archive-journal .content-area,
+.post-type-archive-journal .journal-archive,
+.post-type-archive-journal .journal-archive .journal-wrap {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: clamp(18px, 3vw, 32px) 24px;
+}
+
+/* Date label alignment relative to rail/dot */
+.timeline > li > .time,
+.journal-timeline > li > .time,
+.timeline > li > :is(time,.jt-date,.timeline-date,.posted-on),
+.journal-timeline > li > :is(time,.jt-date,.timeline-date,.posted-on) {
+  grid-column: 1 !important;
+  display: block;
+  margin: 20px 0 0 !important;      /* drop it just below the dot */
+  text-align: right;                 /* place text to the LEFT of the rail */
+  padding-right: 18px;               /* breathing room from the rail/dot */
+}
+
+/* Keep the dot centered on the rail */
+.timeline .dot,
+.journal-timeline .dot {
+  left: calc(var(--rail-x) - 5px);
+  top: .45rem;
+  z-index: 2;
+}
+
+/* Journal — keep text column aligned even when there's no image */
+
+/* 1) Always use a two-column grid for cards */
+.post-type-archive-journal .timeline > li > article,
+.post-type-archive-journal .journal-timeline > li > article{
+  display: grid;
+  grid-template-columns: 280px 1fr;               /* thumb / copy */
+  gap: clamp(12px, 2vw, 20px);
+}
+
+.post-type-archive-journal .timeline > li > article .media{ grid-column: 1; }
+.post-type-archive-journal .timeline > li > article .body { grid-column: 2; }
+
+/* 2) If there is NO .media, insert a virtual spacer so the copy still starts in col 2 */
+@supports (selector(:has(.x))) {
+  .post-type-archive-journal .timeline > li > article:not(:has(.media))::before,
+  .post-type-archive-journal .journal-timeline > li > article:not(:has(.media))::before{
+    content: "";
+    grid-column: 1;                                /* occupy the thumb column */
+  }
+  .post-type-archive-journal .timeline > li > article:not(:has(.media)) .body,
+  .post-type-archive-journal .journal-timeline > li > article:not(:has(.media)) .body{
+    grid-column: 2;
+  }
+}
+
+/* 3) Kill any older rule that made .no-thumb one column */
+.journal-timeline > li > :is(.jt-card,.timeline-card).no-thumb,
+.timeline > li > :is(.jt-card,.timeline-card).no-thumb{
+  grid-template-columns: 280px 1fr !important;
+}
+
+/* ===== Journal media: photos fill, SVGs center (portrait box) ===== */
+
+/* Media box (portrait) */
+.timeline .media,
+.journal-timeline .media{
+  position: relative;
+  aspect-ratio: 3 / 4;           /* portrait so tall photos aren’t cropped weirdly */
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;                  /* used for centering SVGs */
+  align-items: center;
+  justify-content: center;
+  background: #fff;               /* clean backdrop for logos */
+}
+
+/* Baseline */
+.timeline .media img,
+.journal-timeline .media img{
+  display: block;
+}
+
+/* PHOTOS (non-SVG): full-bleed inside the box */
+.timeline .media img:not([src$=".svg"]),
+.journal-timeline .media img:not([src$=".svg"]){
+  position: absolute;             /* ignore flex centering */
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+/* SVG LOGOS: center and size by width */
+.timeline .media img[src$=".svg"],
+.journal-timeline .media img[src$=".svg"]{
+  position: static;               /* use flex centering from the box */
+  width: 75%;                     /* your logo width */
+  height: auto;
+  max-height: 80%;                /* don’t get taller than the box */
+  object-fit: contain;
+}
+
+/* Nano logo: special sizing by height */
+.timeline .media img[src*="nano.svg"],
+.journal-timeline .media img[src*="nano.svg"]{
+  width: auto;                    /* override the 75% width rule */
+  height: 65%;                    /* requested scale */
+}
+
+/* Mobile: let the image define height (no fixed ratio) */
+@media (max-width: 780px){
+  .timeline .media,
+  .journal-timeline .media{
+    aspect-ratio: auto;           /* grow naturally on narrow screens */
+  }
+  .timeline .media img:not([src$=".svg"]),
+  .journal-timeline .media img:not([src$=".svg"]){
+    position: static;             /* allow natural flow */
+    width: 100%;
+    height: auto;
+  }
+}
+
+/* ---- Journal media: don't force a fixed height for SVG logos ---- */
+
+/* Modern browsers: remove aspect-ratio when the media contains an SVG */
+.timeline .media:has(img[src$=".svg"]),
+.journal-timeline .media:has(img[src$=".svg"]) {
+  aspect-ratio: auto;        /* stop locking the box height */
+  height: auto;
+  padding: 8px 0;            /* gentle vertical breathing room for logos */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Size the SVGs nicely (photos already handled elsewhere) */
+.timeline .media:has(img[src$=".svg"]) img,
+.journal-timeline .media:has(img[src$=".svg"]) img {
+  position: static;          /* ignore the absolute full-bleed rules */
+  width: 75%;
+  height: auto;
+  max-height: 80%;
+  object-fit: contain;
+}
+
+/* Nano logo: 65% height as requested */
+.timeline .media:has(img[src*="nano.svg"]) img,
+.journal-timeline .media:has(img[src*="nano.svg"]) img {
+  width: auto;
+  height: 65%;
 }
