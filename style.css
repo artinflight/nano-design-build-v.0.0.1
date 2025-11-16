@@ -598,16 +598,30 @@ body:not(.is-front) { scroll-padding-top: 72px; }
     margin: 0;
 }
 
+
 .full-page-project-grid {
     display: grid;
-    grid-template-columns: 40% 60%; /* Adjust ratio as needed */
-    align-items: start; /* Align items to the top */
+    grid-template-columns: 45% 55%;
+    min-height: 100vh;
 }
 
 /* Left Column Styling */
+.project-image-column {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Right Column Styling */
 .project-content-scroll {
-    padding: 3rem;
-    /* We no longer need overflow or fixed height here */
+    padding: 3.5rem 4rem 4rem;
+    background: #f8f7f3;
+    border-left: 1px solid rgba(17, 17, 17, 0.08);
+    min-height: 100vh;
 }
 
 .site-header-condensed {
@@ -622,20 +636,18 @@ body:not(.is-front) { scroll-padding-top: 72px; }
 }
 
 .project-content-scroll .entry-title {
-    font-size: 52px;
-    line-height: 1.1;
-    margin-bottom: 2rem;
-}
-
-.project-content-scroll .entry-content {
-    color: #555;
+    font-size: clamp(36px, 4vw, 60px);
+    line-height: 1.05;
     margin-bottom: 2rem;
 }
 
 .project-content-scroll .project-meta {
-    border-top: 1px solid #eee;
-    padding-top: 1.5rem;
-    margin-bottom: 4rem;
+    border-top: 1px solid rgba(17, 17, 17, 0.15);
+    padding-top: 1.25rem;
+    margin-bottom: 3rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem 2rem;
 }
 
 .project-meta .meta-label {
@@ -674,26 +686,56 @@ body:not(.is-front) { scroll-padding-top: 72px; }
 
 
 /* Right Column Styling (The Magic Happens Here) */
-.project-image-column {
-    position: -webkit-sticky; /* For Safari */
-    position: sticky;
-    top: 0; /* Stick to the top of the viewport */
-    height: 100vh; /* It should always be the full height of the screen */
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
+.project-gallery {
+    column-count: 2;
+    column-gap: 2rem;
 }
 
+.project-gallery-item {
+    break-inside: avoid;
+    margin-bottom: 2rem;
+    background: #fff;
+    box-shadow: 0 12px 30px rgba(15, 15, 15, 0.08);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.project-gallery-item img {
+    width: 100%;
+    display: block;
+}
+
+.project-gallery-item figcaption {
+    padding: 0.85rem 1.1rem 1.1rem;
+    font-size: 14px;
+    color: #555;
+    letter-spacing: 0.01em;
+}
+
+.project-gallery-empty {
+    font-size: 16px;
+    font-style: italic;
+    color: #777;
+}
 
 /* --- Responsive Mobile --- */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
     .full-page-project-grid {
-        display: block; /* Revert to a normal block layout */
+        grid-template-columns: 1fr;
     }
 
     .project-image-column {
-       position: static; /* Un-stick the image on mobile */
-       height: 60vh; 
+        position: static;
+        height: 55vh;
+    }
+
+    .project-content-scroll {
+        border-left: none;
+        padding: 2.5rem 1.5rem 3rem;
+    }
+
+    .project-gallery {
+        column-count: 1;
     }
 }
 
