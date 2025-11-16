@@ -100,6 +100,16 @@ $featured_image_url = get_the_post_thumbnail_url( get_the_ID(), 'full' );
                             ?>
                         </div>
 
+                        <?php $project_archive_link = get_post_type_archive_link( 'project' ); ?>
+                        <?php if ( $project_archive_link ) : ?>
+                            <div class="project-archive-cta">
+                                <a class="project-archive-cta__link" href="<?php echo esc_url( $project_archive_link ); ?>">
+                                    <span aria-hidden="true">&larr;</span>
+                                    <span class="project-archive-cta__label">Back to Featured Projects</span>
+                                </a>
+                            </div>
+                        <?php endif; ?>
+
                         <nav class="project-navigation">
                             <div class="nav-previous"><?php previous_post_link( '%link', '← %title' ); ?></div>
                             <div class="nav-next"><?php next_post_link( '%link', '%title →' ); ?></div>

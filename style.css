@@ -659,6 +659,37 @@ body:not(.is-front) { scroll-padding-top: 72px; }
     letter-spacing: 0.5px;
 }
 
+.project-archive-cta {
+    margin: -1rem 0 3rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid rgba(17, 17, 17, 0.15);
+}
+
+.project-archive-cta__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: "Space Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #111;
+    text-decoration: none;
+    padding-bottom: 0.35rem;
+    border-bottom: 2px solid currentColor;
+    transition: color 0.2s ease, gap 0.2s ease;
+}
+
+.project-archive-cta__link:hover,
+.project-archive-cta__link:focus-visible {
+    color: #b85d29;
+    gap: 0.65rem;
+}
+
+.project-archive-cta__link span[aria-hidden="true"] {
+    font-size: 18px;
+}
+
 .project-navigation {
     display: flex;
     justify-content: space-between;
