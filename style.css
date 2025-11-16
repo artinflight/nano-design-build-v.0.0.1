@@ -601,7 +601,7 @@ body:not(.is-front) { scroll-padding-top: 72px; }
 
 .full-page-project-grid {
     display: grid;
-    grid-template-columns: 45% 55%;
+    grid-template-columns: minmax(0, 45%) minmax(0, 55%);
     min-height: 100vh;
     width: 100%;
     box-sizing: border-box;
@@ -616,6 +616,7 @@ body:not(.is-front) { scroll-padding-top: 72px; }
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    min-width: 0;
 }
 
 /* Right Column Styling */
@@ -626,6 +627,7 @@ body:not(.is-front) { scroll-padding-top: 72px; }
     min-height: 100vh;
     width: 100%;
     box-sizing: border-box;
+    min-width: 0;
 }
 
 .site-header-condensed {
