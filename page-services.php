@@ -87,26 +87,43 @@ the_post();
         $position = $index + 1;
         $count    = str_pad( (string) $position, 2, '0', STR_PAD_LEFT );
         $is_even  = 0 === $position % 2;
-        ?>
-        <article id="service-<?php echo esc_attr( $service['slug'] ); ?>" class="services-stack__item <?php echo $is_even ? 'services-stack__item--even' : 'services-stack__item--odd'; ?>">
-          <div class="services-stack__lede">
-            <span class="services-stack__number" aria-hidden="true"><?php echo esc_html( $count ); ?></span>
-            <div>
-              <p class="services-stack__tag"><?php echo esc_html( $service['tagline'] ); ?></p>
-              <h2><?php echo esc_html( $service['title'] ); ?></h2>
-            </div>
-          </div>
 
-          <div class="services-stack__body">
-            <p><?php echo esc_html( $service['description'] ); ?></p>
-            <?php if ( ! empty( $service['highlights'] ) ) : ?>
-              <ul class="services-stack__highlights">
-                <?php foreach ( $service['highlights'] as $highlight ) : ?>
-                  <li><?php echo wp_kses_post( $highlight ); ?></li>
-                <?php endforeach; ?>
-              </ul>
-            <?php endif; ?>
+        ob_start();
+        ?>
+        <div class="services-stack__lede">
+          <span class="services-stack__number" aria-hidden="true"><?php echo esc_html( $count ); ?></span>
+          <div>
+            <p class="services-stack__tag"><?php echo esc_html( $service['tagline'] ); ?></p>
+            <h2><?php echo esc_html( $service['title'] ); ?></h2>
           </div>
+        </div>
+        <?php
+        $lede_markup = ob_get_clean();
+
+        ob_start();
+        ?>
+        <div class="services-stack__body">
+          <p><?php echo esc_html( $service['description'] ); ?></p>
+          <?php if ( ! empty( $service['highlights'] ) ) : ?>
+            <ul class="services-stack__highlights">
+              <?php foreach ( $service['highlights'] as $highlight ) : ?>
+                <li><?php echo wp_kses_post( $highlight ); ?></li>
+              <?php endforeach; ?>
+            </ul>
+          <?php endif; ?>
+        </div>
+        <?php
+        $body_markup = ob_get_clean();
+        ?>
+
+        <article id="service-<?php echo esc_attr( $service['slug'] ); ?>" class="services-stack__item <?php echo $is_even ? 'services-stack__item--even' : 'services-stack__item--odd'; ?>">
+          <?php
+          if ( $is_even ) {
+            echo $body_markup . $lede_markup; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+          } else {
+            echo $lede_markup . $body_markup; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+          }
+          ?>
         </article>
       <?php endforeach; ?>
     </div>
