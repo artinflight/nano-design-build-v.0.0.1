@@ -4,7 +4,7 @@
  * This template has a special full-page, two-column layout.
  */
 
-// We need the featured image URL to use as a CSS background.
+// Hero image for the sticky column.
 $featured_image_url = get_the_post_thumbnail_url( get_the_ID(), 'full' );
 
 ?>
@@ -19,8 +19,12 @@ $featured_image_url = get_the_post_thumbnail_url( get_the_ID(), 'full' );
 
     <div class="full-page-project-grid">
 
+        <div class="project-image-column" style="background-image: url('<?php echo esc_url( $featured_image_url ); ?>');">
+            <?php // The hero column relies on its background image. ?>
+        </div>
+
         <div class="project-content-scroll">
-        
+
             <header class="site-header-condensed">
                 <h1><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php bloginfo( 'name' ); ?></a></h1>
             </header>
@@ -32,9 +36,62 @@ $featured_image_url = get_the_post_thumbnail_url( get_the_ID(), 'full' );
                             <?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
                         </header>
 
-                        <div class="entry-content">
-                            <?php the_content(); ?>
-                        </div>
+                        <?php
+                            $gallery_items = [];
+                            $galleries     = get_post_galleries( get_the_ID(), false );
+
+                            if ( ! empty( $galleries ) && ! empty( $galleries[0]['ids'] ) ) {
+                                $ids = array_map( 'intval', explode( ',', $galleries[0]['ids'] ) );
+                            } else {
+                                $ids = [];
+                                $attachments = get_attached_media( 'image', get_the_ID() );
+
+                                foreach ( $attachments as $attachment ) {
+                                    $ids[] = $attachment->ID;
+                                }
+                            }
+
+                            foreach ( $ids as $image_id ) {
+                                $image_html = wp_get_attachment_image( $image_id, 'large', false, [
+                                    'class'   => 'project-gallery-image',
+                                    'loading' => 'lazy',
+                                ] );
+
+                                if ( ! $image_html ) {
+                                    continue;
+                                }
+
+                                $caption   = wp_get_attachment_caption( $image_id );
+                                $full_url  = wp_get_attachment_image_url( $image_id, 'full' );
+
+                                $gallery_items[] = [
+                                    'image'    => $image_html,
+                                    'caption'  => $caption,
+                                    'full_url' => $full_url,
+                                ];
+                            }
+                        ?>
+
+                        <?php if ( ! empty( $gallery_items ) ) : ?>
+                            <div class="project-gallery" aria-label="Project gallery">
+                                <?php foreach ( $gallery_items as $item ) : ?>
+                                    <figure class="project-gallery-item">
+                                        <?php if ( ! empty( $item['full_url'] ) ) : ?>
+                                            <a href="<?php echo esc_url( $item['full_url'] ); ?>" class="project-gallery-link" data-lightbox="project">
+                                                <?php echo $item['image']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                                            </a>
+                                        <?php else : ?>
+                                            <?php echo $item['image']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                                        <?php endif; ?>
+                                        <?php if ( ! empty( $item['caption'] ) ) : ?>
+                                            <figcaption><?php echo esc_html( $item['caption'] ); ?></figcaption>
+                                        <?php endif; ?>
+                                    </figure>
+                                <?php endforeach; ?>
+                            </div>
+                        <?php else : ?>
+                            <p class="project-gallery-empty">Add a Gallery block to this project to populate imagery.</p>
+                        <?php endif; ?>
 
                         <div class="project-meta">
                             <?php
@@ -48,6 +105,16 @@ $featured_image_url = get_the_post_thumbnail_url( get_the_ID(), 'full' );
                             <div class="nav-next"><?php next_post_link( '%link', '%title →' ); ?></div>
                         </nav>
 
+                        <?php $project_archive_link = get_post_type_archive_link( 'project' ); ?>
+                        <?php if ( $project_archive_link ) : ?>
+                            <div class="project-archive-cta">
+                                <a class="project-archive-cta__link" href="<?php echo esc_url( $project_archive_link ); ?>">
+                                    <span aria-hidden="true">&larr;</span>
+                                    <span class="project-archive-cta__label">Back to Featured Projects</span>
+                                </a>
+                            </div>
+                        <?php endif; ?>
+
                     </article>
                 <?php endwhile; ?>
             </main>
@@ -57,11 +124,65 @@ $featured_image_url = get_the_post_thumbnail_url( get_the_ID(), 'full' );
             </footer>
         </div>
 
-        <div class="project-image-column" style="background-image: url('<?php echo esc_url( $featured_image_url ); ?>');">
-            <?php // This div is intentionally empty. The image is its background. ?>
-        </div>
-
     </div>
+
+    <div class="project-lightbox" id="project-lightbox" aria-hidden="true">
+        <button type="button" class="project-lightbox__close" aria-label="Close gallery">&times;</button>
+        <img src="" alt="" loading="lazy" />
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var lightbox = document.getElementById('project-lightbox');
+            if (!lightbox) {
+                return;
+            }
+
+            var lightboxImage = lightbox.querySelector('img');
+            var closeButton = lightbox.querySelector('.project-lightbox__close');
+            var body = document.body;
+
+            var closeLightbox = function () {
+                lightbox.classList.remove('is-active');
+                body.classList.remove('lightbox-open');
+                if (lightboxImage) {
+                    lightboxImage.src = '';
+                    lightboxImage.alt = '';
+                }
+            };
+
+            document.querySelectorAll('.project-gallery-link').forEach(function (link) {
+                link.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    if (!lightboxImage) {
+                        return;
+                    }
+
+                    lightboxImage.src = link.getAttribute('href');
+                    var nestedImg = link.querySelector('img');
+                    lightboxImage.alt = nestedImg ? nestedImg.getAttribute('alt') || '' : '';
+
+                    lightbox.classList.add('is-active');
+                    body.classList.add('lightbox-open');
+                });
+            });
+
+            if (closeButton) {
+                closeButton.addEventListener('click', closeLightbox);
+            }
+            lightbox.addEventListener('click', function (event) {
+                if (event.target === lightbox) {
+                    closeLightbox();
+                }
+            });
+
+            document.addEventListener('keydown', function (event) {
+                if (event.key === 'Escape' && lightbox.classList.contains('is-active')) {
+                    closeLightbox();
+                }
+            });
+        });
+    </script>
 
     <?php wp_footer(); ?>
 </body>

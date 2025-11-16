@@ -25,37 +25,12 @@ get_header(); ?>
 
     <!-- About -->
     <section class="home-ov__about">
-
-      <figure class="about-media">
-        <img
-          src="https://picsum.photos/seed/ndb-about/1600/600"
-          srcset="
-            https://picsum.photos/seed/ndb-about/1200/450 1200w,
-            https://picsum.photos/seed/ndb-about/1600/600 1600w,
-            https://picsum.photos/seed/ndb-about/2400/900 2400w
-          "
-          sizes="(min-width:1000px) 66vw, 100vw"
-          alt=""
-          loading="lazy" decoding="async">
-      </figure>
-
       <p class="lede">
         Nano Design Build is a Toronto design–build studio focused on modern single-family homes.
         We handle everything from schematic design and approvals to construction management,
         delivering refined, light-filled spaces with lasting detail and craft.
       </p>
     </section>
-
-    <!-- Services (sidebar card) -->
-    <aside class="home-ov__services" aria-labelledby="services-title">
-      <ul class="service-list">
-        <li><strong>Design</strong> – Feasibility, schematic options, 3D visualization.</li>
-        <li><strong>Approvals</strong> – Planning strategy, CoA applications, zoning and site plan.</li>
-        <li><strong>Documentation</strong> – DD/permit sets, coordination with structural, M/E.</li>
-        <li><strong>Build</strong> – Estimating, tendering, construction management, QA.</li>
-        <li><strong>Aftercare</strong> – Closeout, warranties, and support.</li>
-      </ul>
-    </aside>
 
     <!-- Notes & Press -->
     <section class="home-ov__press" aria-labelledby="press-title">
@@ -132,13 +107,6 @@ get_header(); ?>
             <?php endwhile; wp_reset_postdata(); ?>
         </div>
         <div class="section-link">
-            <?php
-            $logo_id  = get_theme_mod( 'custom_logo' );
-            $logo_url = wp_get_attachment_image_url( $logo_id , 'full' );
-            ?>
-
-            <img src="<?php echo esc_url( $logo_url ); ?>" alt="Nano Design Build Logo" class="final-card-logo">
-
             <a href="<?php echo get_post_type_archive_link('project'); ?>">View Featured Projects</a>
         </div>
     <?php endif; ?>
@@ -161,37 +129,20 @@ get_header(); ?>
   opacity:.65; margin:0 0 8px;
 }
 .home-overview .lede{
-  font-size: clamp(18px,2.2vw,22px); line-height:1.65; color:#333; max-width: 66ch;
+  font-size: clamp(18px,2.2vw,22px); line-height:1.65; color:#333;
 }
 
 /* Columns */
-.home-ov__about{ grid-column: 1 / span 8; }
-.home-ov__services{ grid-column: 9 / -1; }
-
-/* About — image band above text */
-.home-ov__about .about-media{
-  margin: 6px 0 14px;
-  border-radius: 14px; overflow: hidden;
-  box-shadow: 0 10px 24px rgba(0,0,0,.06);
-  aspect-ratio: 16 / 6;
+.home-ov__about{ grid-column: 1 / -1; }
+.home-ov__about .lede{
+  max-width:none;
+  width:100%;
+  padding: clamp(18px,3vw,32px);
+  border-radius: 18px;
+  border: 1px solid #ebebeb;
+  background: linear-gradient(135deg, rgba(0,0,0,0.04), rgba(0,0,0,0.02));
+  box-shadow: 0 15px 40px rgba(0,0,0,.05);
 }
-.home-ov__about .about-media img{
-  width:100%; height:100%; object-fit:cover; display:block;
-}
-
-/* Services card */
-.home-ov__services .service-list{
-  list-style:none; margin:0; padding:0;
-  border:1px solid rgba(0,0,0,.06); border-radius:14px; background:#fff;
-  box-shadow:0 10px 24px rgba(0,0,0,.05);
-}
-.home-ov__services .service-list li{
-  padding:14px 16px; border-top:1px solid rgba(0,0,0,.06);
-  color:#333; line-height:1.55;
-}
-.home-ov__services .service-list li:first-child{ border-top:none; border-radius:14px 14px 0 0; }
-.home-ov__services .service-list li:last-child { border-radius:0 0 14px 14px; }
-.home-ov__services .service-list strong{ color:#111; }
 
 /* Notes & Press */
 .home-ov__press{ grid-column: 1 / -1; padding-top: clamp(12px,2vw,18px); margin-top: clamp(22px,3.5vw,40px); }
@@ -225,6 +176,7 @@ get_header(); ?>
   filter: invert(1) grayscale(1) contrast(1.2) brightness(0.30);
   opacity:1;
 }
+
 .logo-roll img[src*="globe-and-mail.svg"]{
   /* Keep Globe & Mail original */
   filter:none; opacity:1;
@@ -233,9 +185,17 @@ get_header(); ?>
 /* Responsive stack */
 @media (max-width: 1000px){
   .home-ov__about{ grid-column: 1 / -1; }
-  .home-ov__services{ grid-column: 1 / -1; }
 }
 @media (max-width: 640px){
+  .logo-roll{
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .logo-roll li,
+  .logo-roll figure{
+    justify-content: center;
+  }
+  .logo-roll li{ padding: 10px 0; }
   .logo-roll figure{ min-height:26px; }
   .logo-roll img{ height:26px; }
 }
@@ -244,16 +204,6 @@ get_header(); ?>
 .sr-only{
   position:absolute!important; width:1px; height:1px; padding:0; margin:-1px;
   overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
-}
-
-/* Slimmer About image band */
-.home-ov__about .about-media{
-  aspect-ratio: 16 / 5;   /* was 16 / 6 — this is shorter */
-  margin: 6px 0 12px;
-}
-/* Optional: even a touch slimmer on wide screens */
-@media (min-width: 1100px){
-  .home-ov__about .about-media{ aspect-ratio: 21 / 6; }
 }
 
 /* More breathing room between Notes & Press and Credentials */

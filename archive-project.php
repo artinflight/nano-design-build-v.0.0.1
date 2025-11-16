@@ -3,7 +3,7 @@
 <main id="main" class="site-main">
 
     <header class="page-header">
-        <h1 class="page-title">Our Projects</h1>
+        <h1 class="page-title">Featured Projects</h1>
         <div class="page-subtitle">A curated selection of our finest architectural projects—brick, stucco, wood, and glass composed into warm, practical plans. Each project pairs modern lines with durable materials, scaled to the street and tuned for light.</div>
     </header>
 

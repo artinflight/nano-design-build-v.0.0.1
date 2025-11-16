@@ -44,14 +44,15 @@
 				) );
 			} else {
 				// Minimal fallback keeps your CPT archive link for Work.
-				$work_url = get_post_type_archive_link( 'project' );
-				?>
-				<ul class="menu">
+                                $work_url = get_post_type_archive_link( 'project' );
+                                ?>
+                                <ul class="menu">
                     <li><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a></li>
-					<li><a href="<?php echo esc_url( $projects_url ); ?>">Projects</a></li>
-					<li><a href="<?php echo esc_url( home_url( '/about/' ) ); ?>">About</a></li>
-					<li><a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">Contact</a></li>
-				</ul>
+                                        <li><a href="<?php echo esc_url( $work_url ); ?>">Projects</a></li>
+                                        <li><a href="<?php echo esc_url( home_url( '/services/' ) ); ?>">Services</a></li>
+                                        <li><a href="<?php echo esc_url( home_url( '/about/' ) ); ?>">About</a></li>
+                                        <li><a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">Contact</a></li>
+                                </ul>
 				<?php
 			}
 			?>
