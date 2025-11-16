@@ -137,6 +137,8 @@ get_header(); ?>
 .home-ov__about .lede{
   max-width:none;
   width:100%;
+  display:block;
+  box-sizing:border-box;
   padding: clamp(18px,3vw,32px);
   border-radius: 18px;
   border: 1px solid #ebebeb;
