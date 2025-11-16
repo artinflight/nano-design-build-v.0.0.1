@@ -86,7 +86,7 @@ the_post();
       <?php foreach ( $services as $index => $service ) :
         $position = $index + 1;
         $count    = str_pad( (string) $position, 2, '0', STR_PAD_LEFT );
-        $is_even  = 0 === $index % 2;
+        $is_even  = 0 === $position % 2;
         ?>
         <article id="service-<?php echo esc_attr( $service['slug'] ); ?>" class="services-stack__item <?php echo $is_even ? 'services-stack__item--even' : 'services-stack__item--odd'; ?>">
           <div class="services-stack__lede">
@@ -186,6 +186,7 @@ the_post();
   padding: clamp(32px, 5vw, 60px) 0;
   border-bottom:1px solid rgba(0,0,0,0.08);
   position:relative;
+  align-items:center;
 }
 
 .services-stack__lede{
