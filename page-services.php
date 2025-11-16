@@ -20,28 +20,78 @@ the_post();
   <section class="services-body" aria-label="Nano Design Build service offerings">
     <div class="services-body__wrap">
       <article class="service-item" id="service-design">
-        <h2>Design</h2>
-        <p>Early collaboration starts with feasibility analysis to understand the potential of your lot, budget, and timeline. We translate those insights into schematic options and clear massing studies, producing immersive 3D visualization that helps you evaluate the design long before construction begins.</p>
+        <div class="service-item__header">
+          <span class="service-item__number">01</span>
+          <h2>Design</h2>
+        </div>
+        <div class="service-item__content">
+          <p>Early collaboration starts with feasibility analysis to understand the potential of your lot, budget, and timeline. We translate those insights into schematic options and clear massing studies, producing immersive 3D visualization that helps you evaluate the design long before construction begins.</p>
+          <ul class="service-item__highlights">
+            <li>Feasibility reviews &amp; code checks</li>
+            <li>Schematic options and early concepts</li>
+            <li>3D visualization and walkthroughs</li>
+          </ul>
+        </div>
       </article>
 
       <article class="service-item" id="service-approvals">
-        <h2>Approvals</h2>
-        <p>We lead the planning strategy, preparing comprehensive Committee of Adjustment applications that speak to local zoning review requirements. Our team coordinates the site plan process and works closely with municipal staff so approvals move forward with clarity and minimal surprises.</p>
+        <div class="service-item__header">
+          <span class="service-item__number">02</span>
+          <h2>Approvals</h2>
+        </div>
+        <div class="service-item__content">
+          <p>We lead the planning strategy, preparing comprehensive Committee of Adjustment applications that speak to local zoning review requirements. Our team coordinates the site plan process and works closely with municipal staff so approvals move forward with clarity and minimal surprises.</p>
+          <ul class="service-item__highlights">
+            <li>Planning strategy &amp; stakeholder preparation</li>
+            <li>Committee of Adjustment submissions</li>
+            <li>Zoning analysis &amp; site plan coordination</li>
+          </ul>
+        </div>
       </article>
 
       <article class="service-item" id="service-documentation">
-        <h2>Documentation</h2>
-        <p>Design development flows into detailed permit drawing sets with coordinated specifications. Structural, mechanical, and electrical consultants are integrated into our workflow, ensuring documentation is buildable, compliant, and ready for pricing.</p>
+        <div class="service-item__header">
+          <span class="service-item__number">03</span>
+          <h2>Documentation</h2>
+        </div>
+        <div class="service-item__content">
+          <p>Design development flows into detailed permit drawing sets with coordinated specifications. Structural, mechanical, and electrical consultants are integrated into our workflow, ensuring documentation is buildable, compliant, and ready for pricing.</p>
+          <ul class="service-item__highlights">
+            <li>Design development &amp; permit drawing sets</li>
+            <li>Specification packages ready for pricing</li>
+            <li>Coordination with structural, mechanical &amp; electrical teams</li>
+          </ul>
+        </div>
       </article>
 
       <article class="service-item" id="service-build">
-        <h2>Build</h2>
-        <p>We manage estimating and tendering, support contractor selection, and remain present during construction management. Regular site reviews and rigorous quality assurance keep the build aligned with intent, cost, and schedule.</p>
+        <div class="service-item__header">
+          <span class="service-item__number">04</span>
+          <h2>Build</h2>
+        </div>
+        <div class="service-item__content">
+          <p>We manage estimating and tendering, support contractor selection, and remain present during construction management. Regular site reviews and rigorous quality assurance keep the build aligned with intent, cost, and schedule.</p>
+          <ul class="service-item__highlights">
+            <li>Estimating and tendering support</li>
+            <li>Contractor selection &amp; procurement</li>
+            <li>Construction management &amp; quality assurance</li>
+          </ul>
+        </div>
       </article>
 
       <article class="service-item" id="service-aftercare">
-        <h2>Aftercare</h2>
-        <p>Closeout is handled with the same care as the first sketch. We compile as-built and closeout documents, coordinate warranties, and provide ongoing support so your home continues to perform beautifully long after move-in.</p>
+        <div class="service-item__header">
+          <span class="service-item__number">05</span>
+          <h2>Aftercare</h2>
+        </div>
+        <div class="service-item__content">
+          <p>Closeout is handled with the same care as the first sketch. We compile as-built and closeout documents, coordinate warranties, and provide ongoing support so your home continues to perform beautifully long after move-in.</p>
+          <ul class="service-item__highlights">
+            <li>Project closeout &amp; as-built documentation</li>
+            <li>Warranty coordination &amp; follow-ups</li>
+            <li>Ongoing client support</li>
+          </ul>
+        </div>
       </article>
     </div>
   </section>
@@ -99,32 +149,83 @@ the_post();
 }
 
 .services-body__wrap{
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(28px, 4vw, 48px);
+  border-top:1px solid rgba(0,0,0,0.08);
 }
 
 .service-item{
-  background:#fafafa;
-  border-radius: 18px;
-  padding: clamp(26px, 5vw, 42px);
-  box-shadow: 0 14px 32px rgba(15,15,15,0.06);
-  border: 1px solid rgba(0,0,0,0.04);
+  display:grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: clamp(16px, 4vw, 32px);
+  align-items:center;
+  padding: clamp(32px, 5vw, 56px) 0;
+  border-bottom:1px solid rgba(0,0,0,0.08);
 }
 
-.service-item h2{
-  margin-top:0;
-  margin-bottom: 16px;
-  font-size: clamp(26px, 3vw, 34px);
+.service-item__header{
+  grid-column: 1 / span 4;
+  display:flex;
+  align-items:center;
+  gap: 18px;
 }
 
-.service-item p{
+.service-item__number{
+  font-size: clamp(36px, 6vw, 72px);
+  font-weight:200;
+  letter-spacing:.06em;
+  color: rgba(0,0,0,0.2);
+  line-height:1;
+}
+
+.service-item__header h2{
   margin:0;
+  font-size: clamp(28px, 4vw, 42px);
+  letter-spacing:-0.01em;
+}
+
+.service-item__content{
+  grid-column: span 8;
+  background: linear-gradient(120deg, rgba(245,245,245,0.9), rgba(255,255,255,0.9));
+  border-radius: 24px;
+  padding: clamp(28px, 5vw, 46px);
+  box-shadow: 0 18px 40px rgba(15,15,15,0.08);
+}
+
+.service-item__content p{
+  margin:0 0 22px;
   font-size: clamp(17px, 2vw, 20px);
   line-height:1.7;
-  color:#333;
+  color:#2c2c2c;
+}
+
+.service-item__highlights{
+  margin:0;
+  padding:0;
+  list-style:none;
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+}
+
+.service-item__highlights li{
+  font-size:14px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  background:#fff;
+  border-radius:999px;
+  padding:10px 18px;
+  border:1px solid rgba(0,0,0,0.08);
+}
+
+.service-item:nth-child(even) .service-item__header{
+  grid-column: 9 / -1;
+  justify-content:flex-end;
+  text-align:right;
+}
+
+.service-item:nth-child(even) .service-item__content{
+  grid-column: 1 / span 8;
 }
 
 .services-cta{
@@ -170,19 +271,44 @@ the_post();
   box-shadow:0 12px 26px rgba(0,0,0,0.12);
 }
 
+@media (max-width: 1100px){
+  .service-item__header{
+    grid-column: 1 / span 5;
+  }
+  .service-item__content{
+    grid-column: span 7;
+  }
+  .service-item:nth-child(even) .service-item__header{
+    grid-column: 8 / -1;
+  }
+}
+
 @media (max-width: 900px){
-  .services-body__wrap{
+  .services-body{
+    padding: 36px 18px clamp(48px, 12vw, 90px);
+  }
+
+  .service-item{
     grid-template-columns: 1fr;
+  }
+
+  .service-item__header,
+  .service-item__content,
+  .service-item:nth-child(even) .service-item__header,
+  .service-item:nth-child(even) .service-item__content{
+    grid-column: auto;
+    text-align:left;
+    justify-content:flex-start;
+  }
+
+  .service-item__header{
+    margin-bottom:12px;
   }
 }
 
 @media (max-width: 600px){
   .services-hero{
     padding: clamp(56px, 24vw, 96px) 18px clamp(36px, 12vw, 72px);
-  }
-
-  .services-body{
-    padding: 36px 18px clamp(48px, 16vw, 84px);
   }
 
   .services-cta{
