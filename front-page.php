@@ -107,13 +107,6 @@ get_header(); ?>
             <?php endwhile; wp_reset_postdata(); ?>
         </div>
         <div class="section-link">
-            <?php
-            $logo_id  = get_theme_mod( 'custom_logo' );
-            $logo_url = wp_get_attachment_image_url( $logo_id , 'full' );
-            ?>
-
-            <img src="<?php echo esc_url( $logo_url ); ?>" alt="Nano Design Build Logo" class="final-card-logo">
-
             <a href="<?php echo get_post_type_archive_link('project'); ?>">View Featured Projects</a>
         </div>
     <?php endif; ?>
