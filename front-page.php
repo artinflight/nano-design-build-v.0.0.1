@@ -189,12 +189,13 @@ get_header(); ?>
 @media (max-width: 640px){
   .logo-roll{
     grid-template-columns: 1fr;
-    gap: 12px;
+    gap: 18px;
   }
   .logo-roll li,
   .logo-roll figure{
-    justify-content: flex-start;
+    justify-content: center;
   }
+  .logo-roll li{ padding: 10px 0; }
   .logo-roll figure{ min-height:26px; }
   .logo-roll img{ height:26px; }
 }
