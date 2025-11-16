@@ -36,13 +36,6 @@ $featured_image_url = get_the_post_thumbnail_url( get_the_ID(), 'full' );
                             <?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
                         </header>
 
-                        <div class="project-meta">
-                            <?php
-                                the_terms( get_the_ID(), 'location', '<div class="meta-item"><span class="meta-label">Location</span><span class="meta-value">', ', ', '</span></div>' );
-                                the_terms( get_the_ID(), 'style', '<div class="meta-item"><span class="meta-label">Style</span><span class="meta-value">', ', ', '</span></div>' );
-                            ?>
-                        </div>
-
                         <?php
                             $gallery_items = [];
                             $galleries     = get_post_galleries( get_the_ID(), false );
@@ -68,11 +61,13 @@ $featured_image_url = get_the_post_thumbnail_url( get_the_ID(), 'full' );
                                     continue;
                                 }
 
-                                $caption = wp_get_attachment_caption( $image_id );
+                                $caption   = wp_get_attachment_caption( $image_id );
+                                $full_url  = wp_get_attachment_image_url( $image_id, 'full' );
 
                                 $gallery_items[] = [
-                                    'image'   => $image_html,
-                                    'caption' => $caption,
+                                    'image'    => $image_html,
+                                    'caption'  => $caption,
+                                    'full_url' => $full_url,
                                 ];
                             }
                         ?>
@@ -81,7 +76,13 @@ $featured_image_url = get_the_post_thumbnail_url( get_the_ID(), 'full' );
                             <div class="project-gallery" aria-label="Project gallery">
                                 <?php foreach ( $gallery_items as $item ) : ?>
                                     <figure class="project-gallery-item">
-                                        <?php echo $item['image']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                                        <?php if ( ! empty( $item['full_url'] ) ) : ?>
+                                            <a href="<?php echo esc_url( $item['full_url'] ); ?>" class="project-gallery-link" data-lightbox="project">
+                                                <?php echo $item['image']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                                            </a>
+                                        <?php else : ?>
+                                            <?php echo $item['image']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                                        <?php endif; ?>
                                         <?php if ( ! empty( $item['caption'] ) ) : ?>
                                             <figcaption><?php echo esc_html( $item['caption'] ); ?></figcaption>
                                         <?php endif; ?>
@@ -91,6 +92,13 @@ $featured_image_url = get_the_post_thumbnail_url( get_the_ID(), 'full' );
                         <?php else : ?>
                             <p class="project-gallery-empty">Add a Gallery block to this project to populate imagery.</p>
                         <?php endif; ?>
+
+                        <div class="project-meta">
+                            <?php
+                                the_terms( get_the_ID(), 'location', '<div class="meta-item"><span class="meta-label">Location</span><span class="meta-value">', ', ', '</span></div>' );
+                                the_terms( get_the_ID(), 'style', '<div class="meta-item"><span class="meta-label">Style</span><span class="meta-value">', ', ', '</span></div>' );
+                            ?>
+                        </div>
 
                         <nav class="project-navigation">
                             <div class="nav-previous"><?php previous_post_link( '%link', '← %title' ); ?></div>
@@ -107,6 +115,64 @@ $featured_image_url = get_the_post_thumbnail_url( get_the_ID(), 'full' );
         </div>
 
     </div>
+
+    <div class="project-lightbox" id="project-lightbox" aria-hidden="true">
+        <button type="button" class="project-lightbox__close" aria-label="Close gallery">&times;</button>
+        <img src="" alt="" loading="lazy" />
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var lightbox = document.getElementById('project-lightbox');
+            if (!lightbox) {
+                return;
+            }
+
+            var lightboxImage = lightbox.querySelector('img');
+            var closeButton = lightbox.querySelector('.project-lightbox__close');
+            var body = document.body;
+
+            var closeLightbox = function () {
+                lightbox.classList.remove('is-active');
+                body.classList.remove('lightbox-open');
+                if (lightboxImage) {
+                    lightboxImage.src = '';
+                    lightboxImage.alt = '';
+                }
+            };
+
+            document.querySelectorAll('.project-gallery-link').forEach(function (link) {
+                link.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    if (!lightboxImage) {
+                        return;
+                    }
+
+                    lightboxImage.src = link.getAttribute('href');
+                    var nestedImg = link.querySelector('img');
+                    lightboxImage.alt = nestedImg ? nestedImg.getAttribute('alt') || '' : '';
+
+                    lightbox.classList.add('is-active');
+                    body.classList.add('lightbox-open');
+                });
+            });
+
+            if (closeButton) {
+                closeButton.addEventListener('click', closeLightbox);
+            }
+            lightbox.addEventListener('click', function (event) {
+                if (event.target === lightbox) {
+                    closeLightbox();
+                }
+            });
+
+            document.addEventListener('keydown', function (event) {
+                if (event.key === 'Escape' && lightbox.classList.contains('is-active')) {
+                    closeLightbox();
+                }
+            });
+        });
+    </script>
 
     <?php wp_footer(); ?>
 </body>

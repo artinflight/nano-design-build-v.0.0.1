@@ -644,7 +644,7 @@ body:not(.is-front) { scroll-padding-top: 72px; }
 .project-content-scroll .project-meta {
     border-top: 1px solid rgba(17, 17, 17, 0.15);
     padding-top: 1.25rem;
-    margin-bottom: 3rem;
+    margin: 3rem 0;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 1rem 2rem;
@@ -700,6 +700,25 @@ body:not(.is-front) { scroll-padding-top: 72px; }
     overflow: hidden;
 }
 
+.project-gallery-link {
+    display: block;
+    position: relative;
+}
+
+.project-gallery-link::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.08);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.project-gallery-link:focus-visible::after,
+.project-gallery-link:hover::after {
+    opacity: 1;
+}
+
 .project-gallery-item img {
     width: 100%;
     display: block;
@@ -716,6 +735,58 @@ body:not(.is-front) { scroll-padding-top: 72px; }
     font-size: 16px;
     font-style: italic;
     color: #777;
+}
+
+.project-lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(8, 8, 8, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+}
+
+.project-lightbox.is-active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.project-lightbox img {
+    max-width: min(90vw, 1200px);
+    max-height: 90vh;
+    width: auto;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+}
+
+.project-lightbox__close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    color: #fff;
+    font-size: 2rem;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 999px;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.project-lightbox__close:hover,
+.project-lightbox__close:focus-visible {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+body.lightbox-open {
+    overflow: hidden;
 }
 
 /* --- Responsive Mobile --- */
