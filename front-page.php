@@ -25,20 +25,6 @@ get_header(); ?>
 
     <!-- About -->
     <section class="home-ov__about">
-
-      <figure class="about-media">
-        <img
-          src="https://picsum.photos/seed/ndb-about/1600/600"
-          srcset="
-            https://picsum.photos/seed/ndb-about/1200/450 1200w,
-            https://picsum.photos/seed/ndb-about/1600/600 1600w,
-            https://picsum.photos/seed/ndb-about/2400/900 2400w
-          "
-          sizes="(min-width:1000px) 66vw, 100vw"
-          alt=""
-          loading="lazy" decoding="async">
-      </figure>
-
       <p class="lede">
         Nano Design Build is a Toronto design–build studio focused on modern single-family homes.
         We handle everything from schematic design and approvals to construction management,
@@ -150,21 +136,19 @@ get_header(); ?>
   opacity:.65; margin:0 0 8px;
 }
 .home-overview .lede{
-  font-size: clamp(18px,2.2vw,22px); line-height:1.65; color:#333; max-width: 66ch;
+  font-size: clamp(18px,2.2vw,22px); line-height:1.65; color:#333;
 }
 
 /* Columns */
 .home-ov__about{ grid-column: 1 / -1; }
-
-/* About — image band above text */
-.home-ov__about .about-media{
-  margin: 6px 0 14px;
-  border-radius: 14px; overflow: hidden;
-  box-shadow: 0 10px 24px rgba(0,0,0,.06);
-  aspect-ratio: 16 / 6;
-}
-.home-ov__about .about-media img{
-  width:100%; height:100%; object-fit:cover; display:block;
+.home-ov__about .lede{
+  max-width:none;
+  width:100%;
+  padding: clamp(18px,3vw,32px);
+  border-radius: 18px;
+  border: 1px solid #ebebeb;
+  background: linear-gradient(135deg, rgba(0,0,0,0.04), rgba(0,0,0,0.02));
+  box-shadow: 0 15px 40px rgba(0,0,0,.05);
 }
 
 /* Notes & Press */
@@ -199,6 +183,7 @@ get_header(); ?>
   filter: invert(1) grayscale(1) contrast(1.2) brightness(0.30);
   opacity:1;
 }
+
 .logo-roll img[src*="globe-and-mail.svg"]{
   /* Keep Globe & Mail original */
   filter:none; opacity:1;
@@ -209,6 +194,14 @@ get_header(); ?>
   .home-ov__about{ grid-column: 1 / -1; }
 }
 @media (max-width: 640px){
+  .logo-roll{
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .logo-roll li,
+  .logo-roll figure{
+    justify-content: flex-start;
+  }
   .logo-roll figure{ min-height:26px; }
   .logo-roll img{ height:26px; }
 }
@@ -217,16 +210,6 @@ get_header(); ?>
 .sr-only{
   position:absolute!important; width:1px; height:1px; padding:0; margin:-1px;
   overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
-}
-
-/* Slimmer About image band */
-.home-ov__about .about-media{
-  aspect-ratio: 16 / 5;   /* was 16 / 6 — this is shorter */
-  margin: 6px 0 12px;
-}
-/* Optional: even a touch slimmer on wide screens */
-@media (min-width: 1100px){
-  .home-ov__about .about-media{ aspect-ratio: 21 / 6; }
 }
 
 /* More breathing room between Notes & Press and Credentials */
