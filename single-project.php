@@ -100,6 +100,11 @@ $featured_image_url = get_the_post_thumbnail_url( get_the_ID(), 'full' );
                             ?>
                         </div>
 
+                        <nav class="project-navigation">
+                            <div class="nav-previous"><?php previous_post_link( '%link', '← %title' ); ?></div>
+                            <div class="nav-next"><?php next_post_link( '%link', '%title →' ); ?></div>
+                        </nav>
+
                         <?php $project_archive_link = get_post_type_archive_link( 'project' ); ?>
                         <?php if ( $project_archive_link ) : ?>
                             <div class="project-archive-cta">
@@ -109,11 +114,6 @@ $featured_image_url = get_the_post_thumbnail_url( get_the_ID(), 'full' );
                                 </a>
                             </div>
                         <?php endif; ?>
-
-                        <nav class="project-navigation">
-                            <div class="nav-previous"><?php previous_post_link( '%link', '← %title' ); ?></div>
-                            <div class="nav-next"><?php next_post_link( '%link', '%title →' ); ?></div>
-                        </nav>
 
                     </article>
                 <?php endwhile; ?>

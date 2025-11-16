@@ -660,9 +660,9 @@ body:not(.is-front) { scroll-padding-top: 72px; }
 }
 
 .project-archive-cta {
-    margin: -1rem 0 3rem;
-    padding-bottom: 2.5rem;
-    border-bottom: 1px solid rgba(17, 17, 17, 0.15);
+    margin: 3rem 0 0;
+    padding-top: 2.5rem;
+    border-top: 1px solid rgba(17, 17, 17, 0.15);
 }
 
 .project-archive-cta__link {
