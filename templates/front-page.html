@@ -1,0 +1,53 @@
+<!-- wp:template-part {"slug":"header","tagName":"header"} /-->
+
+<!-- wp:cover {"url":"http://nano-design-build-v1.test/wp-content/uploads/2025/07/250705-NanoGreenDot-NanoBackgroundVideo.mp4","id":1,"dimRatio":50,"minHeight":100,"minHeightUnit":"vh","contentPosition":"center center","isDark":false} -->
+<div class="wp-block-cover" style="min-height:100vh">
+    <span aria-hidden="true" class="wp-block-cover__background-container">
+        <video class="wp-block-cover__video-background" autoplay muted loop src="http://nano-design-build-v1.test/wp-content/uploads/2025/07/250705-NanoGreenDot-NanoBackgroundVideo.mp4" poster="YOUR_POSTER_IMAGE_URL.jpg"></video>
+    </span>
+    <div class="wp-block-cover__inner-container">
+        <!-- wp:group {"layout":{"type":"constrained"}} -->
+        <div class="wp-block-group">
+            <!-- wp:heading {"textAlign":"center","level":1,"style":{"typography":{"fontSize":"4rem"}}} -->
+            <h1 class="has-text-align-center" style="font-size:4rem">Designing & Building The Future</h1>
+            <!-- /wp:heading -->
+            <!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"1.5rem"}}} -->
+            <p class="has-text-align-center" style="font-size:1.5rem">We craft bespoke homes that merge timeless design with modern living.</p>
+            <!-- /wp:paragraph -->
+        </div>
+        <!-- /wp:group -->
+    </div>
+</div>
+<!-- /wp:cover -->
+
+<!-- wp:group {"tagName":"main","style":{"spacing":{"padding":{"top":"var:preset|spacing|80","bottom":"var:preset|spacing|80"}}},"layout":{"type":"constrained"}} -->
+<main class="wp-block-group" style="padding-top:var(--wp--preset--spacing--80);padding-bottom:var(--wp--preset--spacing--80)">
+    <!-- wp:heading {"textAlign":"center"} -->
+    <h2 class="has-text-align-center">Recent Work</h2>
+    <!-- /wp:heading -->
+
+    <!-- wp:query {"queryId":1,"query":{"perPage":3,"pages":0,"offset":0,"postType":"project","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":false}} -->
+    <div class="wp-block-query">
+        <!-- wp:post-template -->
+            <!-- wp:post-featured-image {"isLink":true} /-->
+            <!-- wp:post-title {"isLink":true} /-->
+            <!-- wp:post-excerpt /-->
+            <!-- wp:post-terms {"term":"location"} /-->
+        <!-- /wp:post-template -->
+    </div>
+    <!-- /wp:query -->
+
+    <!-- wp:group {"style":{"spacing":{"margin":{"top":"var:preset|spacing|60"}}},"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"center"}} -->
+    <div class="wp-block-group" style="margin-top:var(--wp--preset--spacing--60)">
+        <!-- wp:image {"width":32,"height":32,"sizeSlug":"full","linkDestination":"none"} -->
+        <figure class="wp-block-image size-full is-resized"><img src="/wp-content/themes/nano-design-build/images/nano.svg" alt="Nano Design Build Logo" width="32" height="32"/></figure>
+        <!-- /wp:image -->
+        <!-- wp:paragraph -->
+        <p><a href="/projects">View All Projects</a></p>
+        <!-- /wp:paragraph -->
+    </div>
+    <!-- /wp:group -->
+</main>
+<!-- /wp:group -->
+
+<!-- wp:template-part {"slug":"footer","tagName":"footer"} /-->
