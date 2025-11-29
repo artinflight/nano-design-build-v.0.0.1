@@ -168,20 +168,25 @@ get_header(); ?>
   gap:24px; align-items:center; margin:0; padding:0; list-style:none;
 }
 .logo-roll li{ display:flex; align-items:center; justify-content:center; }
-.logo-roll figure{ display:flex; align-items:center; justify-content:center; min-height:32px; }
+.logo-roll figure{
+  display:flex; align-items:center; justify-content:center;
+  min-height:32px;
+  overflow:hidden;
+}
 .logo-roll img{
   height:32px;
   width:auto;
   display:block;
   filter: grayscale(100%);
-  opacity:.8;
-  transition: transform .2s ease, filter .2s ease, opacity .2s ease;
+  opacity:.75;
+  transform: scale(1);
+  transition: transform .25s ease, filter .25s ease, opacity .25s ease;
 }
 .logo-roll img:hover,
 .logo-roll img:focus-visible{
   filter: none;
   opacity:1;
-  transform: scale(1.05);
+  transform: scale(1.06);
 }
 
 /* Per-logo tuning */
