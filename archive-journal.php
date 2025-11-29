@@ -18,7 +18,7 @@ get_header(); ?>
           <article <?php post_class('recognition-card'); ?>>
             <?php if ( has_post_thumbnail() ) : ?>
               <figure class="recognition-card__media">
-                <?php the_post_thumbnail('journal-thumb'); ?>
+                <?php the_post_thumbnail('recognitions-thumb'); ?>
               </figure>
             <?php endif; ?>
 

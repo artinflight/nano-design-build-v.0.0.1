@@ -35,10 +35,10 @@ get_header(); ?>
     <!-- Notes & Press -->
     <section class="home-ov__press" aria-labelledby="press-title">
       <ul class="press-list">
-        <li><strong>2013 — The Globe and Mail</strong>: Two projects profiled; “Home of the Week.”</li>
-        <li><strong>2009 — Canada Green Building Council</strong>: Membership.</li>
-        <li><strong>2006 — Tarion</strong>: Licensed new-home builder.</li>
-        <li><strong>2005 — Founded</strong>: Studio established in Toronto.</li>
+        <li><strong>The Globe and Mail</strong>: Two projects profiled; “Home of the Week.”</li>
+        <li><strong>Canada Green Building Council</strong>: Membership.</li>
+        <li><strong>Tarion</strong>: Licensed new-home builder.</li>
+        <li><strong>Founded</strong>: Studio established in Toronto.</li>
       </ul>
     </section>
 
@@ -169,8 +169,20 @@ get_header(); ?>
 }
 .logo-roll li{ display:flex; align-items:center; justify-content:center; }
 .logo-roll figure{ display:flex; align-items:center; justify-content:center; min-height:32px; }
-.logo-roll img{ height:32px; width:auto; display:block; filter: grayscale(1) contrast(1.05); opacity:.9; }
-.logo-roll img:hover{ opacity:1; }
+.logo-roll img{
+  height:32px;
+  width:auto;
+  display:block;
+  filter: grayscale(100%);
+  opacity:.8;
+  transition: transform .2s ease, filter .2s ease, opacity .2s ease;
+}
+.logo-roll img:hover,
+.logo-roll img:focus-visible{
+  filter: none;
+  opacity:1;
+  transform: scale(1.05);
+}
 
 /* Per-logo tuning */
 .logo-roll img[src*="cagbc.svg"]{
