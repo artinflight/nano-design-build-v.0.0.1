@@ -233,6 +233,18 @@ add_filter('the_content', function ($content) {
     return $content;
 }, 20);
 
+// Normalize brand name on recognitions so "Inc." never appears publicly.
+function nanodesignbuild_normalize_recognition_branding( $value, $post_id = 0 ) {
+    $post = $post_id ? get_post( $post_id ) : get_post();
+    if ( ! $post || 'journal' !== $post->post_type ) {
+        return $value;
+    }
+
+    return preg_replace( '/Nano\s+Design\s+Build\s+Inc\.?/i', 'Nano Design Build', $value );
+}
+add_filter( 'the_content', 'nanodesignbuild_normalize_recognition_branding', 12 );
+add_filter( 'the_title', 'nanodesignbuild_normalize_recognition_branding', 12, 2 );
+
 // Disable the admin bar on the front-end for all logged-in users.
 add_filter( 'show_admin_bar', '__return_false' );
 

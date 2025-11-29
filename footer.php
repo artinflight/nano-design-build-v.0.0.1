@@ -1,104 +1,53 @@
 <footer class="site-footer">
     <div class="footer-inner">
-        <!-- Brand / Logo -->
-        <div class="footer-column footer-column--brand">
-            <?php
-            $logo_id  = get_theme_mod( 'custom_logo' );
-            $logo_url = $logo_id ? wp_get_attachment_image_url( $logo_id, 'full' ) : '';
-            if ( $logo_url ) : ?>
-                <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="footer-logo-link">
-                    <img src="<?php echo esc_url( $logo_url ); ?>" alt="<?php bloginfo( 'name' ); ?>" class="footer-logo">
-                </a>
-            <?php else : ?>
-                <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="footer-logo-fallback">
-                    <?php bloginfo( 'name' ); ?>
-                </a>
-            <?php endif; ?>
-
-            <p class="footer-tagline">
-                Modern residential design and build in the GTA.
-            </p>
-        </div>
-
-        <!-- Contact info -->
-        <div class="footer-column footer-column--contact">
-            <h4 class="footer-heading">Contact</h4>
-            <p>
-                <!-- TODO: Replace with real contact details -->
-                <a href="mailto:info@nanodesignbuild.com">info@nanodesignbuild.com</a><br>
-                <span>Greater Toronto Area</span><br>
-                <span>By appointment only</span>
-            </p>
-        </div>
-
-        <!-- Featured Projects -->
-        <div class="footer-column footer-column--projects">
-            <h4 class="footer-heading">Featured Projects</h4>
-            <ul class="footer-list">
+        <div class="footer-grid">
+            <!-- Brand / Logo -->
+            <div class="footer-column footer-column--brand">
                 <?php
-                $footer_projects = new WP_Query( [
-                    'post_type'      => 'project',
-                    'posts_per_page' => 2,
-                    'post_status'    => 'publish',
-                    'no_found_rows'  => true,
-                ] );
-
-                if ( $footer_projects->have_posts() ) :
-                    while ( $footer_projects->have_posts() ) :
-                        $footer_projects->the_post(); ?>
-                        <li>
-                            <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-                        </li>
-                    <?php endwhile;
-                    wp_reset_postdata();
-                else : ?>
-                    <li class="footer-list-empty">Coming soon.</li>
+                $logo_id  = get_theme_mod( 'custom_logo' );
+                $logo_url = $logo_id ? wp_get_attachment_image_url( $logo_id, 'full' ) : '';
+                if ( $logo_url ) : ?>
+                    <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="footer-logo-link">
+                        <img src="<?php echo esc_url( $logo_url ); ?>" alt="<?php bloginfo( 'name' ); ?>" class="footer-logo">
+                    </a>
+                <?php else : ?>
+                    <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="footer-logo-fallback">
+                        <?php bloginfo( 'name' ); ?>
+                    </a>
                 <?php endif; ?>
-            </ul>
+
+                <p class="footer-tagline">
+                    Modern residential design and build in the GTA.
+                </p>
+            </div>
+
+            <!-- Contact info -->
+            <div class="footer-column footer-column--contact">
+                <h4 class="footer-heading">Contact</h4>
+                <ul class="footer-contact">
+                    <li class="footer-contact__line">1670 Bayview Avenue, Suite 302, Toronto, ON, M4G 3C2</li>
+                    <li class="footer-contact__line">
+                        <a href="tel:4164883350">T: 416-488-3350</a>
+                    </li>
+                    <li class="footer-contact__line">
+                        <a href="mailto:info@nanodesignbuild.com">info@nanodesignbuild.com</a>
+                    </li>
+                </ul>
+            </div>
         </div>
 
-        <!-- Recognitions -->
-        <div class="footer-column footer-column--recognitions">
-            <h4 class="footer-heading">Recognitions</h4>
-            <ul class="footer-list">
-                <?php
-                $footer_recognitions = new WP_Query( [
-                    'post_type'      => 'journal', // front-facing label is "Recognitions"
-                    'posts_per_page' => 4,
-                    'post_status'    => 'publish',
-                    'no_found_rows'  => true,
-                ] );
-
-                if ( $footer_recognitions->have_posts() ) :
-                    while ( $footer_recognitions->have_posts() ) :
-                        $footer_recognitions->the_post(); ?>
-                        <li>
-                            <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-                        </li>
-                    <?php endwhile;
-                    wp_reset_postdata();
-                else : ?>
-                    <li class="footer-list-empty">Coming soon.</li>
-                <?php endif; ?>
-            </ul>
+        <div class="footer-social" aria-label="Social media">
+            <!-- TODO: Replace placeholder links with live profiles -->
+            <a class="footer-social__link" href="#" aria-label="Instagram">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4Zm0 2a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H7Zm5 2.5A4.5 4.5 0 1 1 7.5 12 4.5 4.5 0 0 1 12 7.5Zm0 2a2.5 2.5 0 1 0 2.5 2.5A2.5 2.5 0 0 0 12 9.5Zm5.25-2.75a.75.75 0 1 1-.75.75.75.75 0 0 1 .75-.75Z"/></svg>
+            </a>
+            <a class="footer-social__link" href="#" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.94 9.75V18H4.13V9.75h2.81ZM5.53 6a1.62 1.62 0 1 1 0 3.24 1.62 1.62 0 0 1 0-3.24ZM19.88 18h-2.8v-4.39c0-1.2-.43-1.98-1.52-1.98-.83 0-1.32.56-1.54 1.1-.08.2-.1.47-.1.74V18h-2.8s.04-7.53 0-8.25h2.8v1.17c.37-.57 1.03-1.38 2.51-1.38 1.83 0 3.23 1.2 3.23 3.77V18Z"/></svg>
+            </a>
+            <a class="footer-social__link" href="#" aria-label="Houzz">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3v18l7-3.5V13l7 3.5V3L12 6.5V11L5 7.5V3Z"/></svg>
+            </a>
         </div>
-
-        <!-- Footer nav -->
-        <div class="footer-column footer-column--nav">
-            <h4 class="footer-heading">Navigate</h4>
-            <?php
-            wp_nav_menu( [
-                'theme_location' => 'primary',
-                'container'      => false,
-                'menu_class'     => 'footer-menu',
-                'fallback_cb'    => false,
-            ] );
-            ?>
-        </div>
-    </div>
-
-    <div class="footer-bottom">
-        <p>&copy; <?php echo date('Y'); ?> <?php bloginfo( 'name' ); ?>. All rights reserved.</p>
     </div>
 </footer>
 

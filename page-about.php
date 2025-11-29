@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: About (Magazine)
+ * Template Name: Practice (Magazine)
  */
 get_header();
 
@@ -24,9 +24,9 @@ the_post();
       <img src="<?php echo esc_url( $hero ); ?>" alt="Studio work by Nano Design Build" loading="eager" fetchpriority="high">
     </figure>
     <div class="about-hero-copy">
-      <h1>About Nano Design Build Inc.</h1>
+      <h1>Practice</h1>
       <p class="kicker">Founded in 2005 • Toronto, Canada</p>
-      <p class="lede">We create tailored, light-driven homes with a rigorous, end-to-end approach—design and build, unified.</p>
+      <p class="lede">Nano Design Build creates tailored, light-driven homes with a rigorous, end-to-end approach—design and build, unified.</p>
     </div>
   </section>
 
@@ -109,11 +109,7 @@ the_post();
 
 
   <!-- Image collage -->
-  <section class="about-collage">
-    <figure><img src="<?php echo esc_url( $iA ); ?>" alt=""></figure>
-    <figure><img src="<?php echo esc_url( $iB ); ?>" alt=""></figure>
-    <figure><img src="<?php echo esc_url( $iC ); ?>" alt=""></figure>
-  </section>
+  <!-- Collage removed for a leaner Practice page -->
 </main>
 
 <?php get_footer(); ?>
