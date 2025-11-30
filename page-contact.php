@@ -6,9 +6,9 @@ get_header();
 
 // --- Config (editable via Customizer) ---
 $company   = get_theme_mod('ndb_contact_company',  'Nano Design Build');
-$address   = get_theme_mod('ndb_contact_address',  "1670 Bayview Ave., Suite 302\nToronto, ON  M4G 3C2");
+$address   = get_theme_mod('ndb_contact_address',  '1670 Bayview Avenue, Suite 302, Toronto, ON, M4G 3C2');
 $phone_raw = get_theme_mod('ndb_contact_phone',    '416-488-3350');
-$email_raw = get_theme_mod('ndb_contact_recipient', get_option('admin_email') ?: 'admin@nanodesignbuild.com');
+$email_raw = get_theme_mod('ndb_contact_recipient', 'info@nanodesignbuild.com');
 
 $phone_href = preg_replace('/[^0-9+]/', '', $phone_raw);
 $email_disp = antispambot($email_raw);
@@ -76,7 +76,7 @@ $action = 'ndb_contact';
     <div class="studio-layout">
       <div class="studio-col studio-col--about">
         <div class="studio-name"><?php echo esc_html($company); ?></div>
-        <address class="studio-address"><?php echo nl2br( esc_html($address) ); ?></address>
+        <address class="studio-address"><?php echo esc_html($address); ?></address>
       </div>
 
       <div class="studio-col studio-col--contact">
@@ -94,92 +94,6 @@ $action = 'ndb_contact';
 </section>
 
 </main>
-
-<style>
-/* Scoped styles for the Contact template */
-.page-contact .contact-hero { text-align:center; margin-bottom: 1.25rem; }
-.page-contact .lede{color:#555;margin:.5rem 0 0}
-
-/* Single-column, centered form */
-.page-contact .contact-section { display:flex; justify-content:center; }
-.page-contact .contact-form{
-  width: min(720px, 100%);
-  display:grid; gap:16px;
-  padding: 0 16px;
-}
-.page-contact .field label{display:block;font-size:14px;letter-spacing:.02em;margin:0 0 .35rem;color:#333}
-.page-contact .field input,.page-contact .field textarea{
-  width:100%;border:1px solid #ddd;border-radius:10px;padding:12px 14px;font:inherit;outline:0;
-  transition:border-color .15s ease, box-shadow .15s ease; background:#fff;
-}
-.page-contact .field input:focus,.page-contact .field textarea:focus{
-  border-color:#888; box-shadow:0 0 0 3px rgba(0,0,0,.06)
-}
-.page-contact .btn{
-  appearance:none;border:1px solid #111;background:#111;color:#fff;border-radius:999px;
-  padding:10px 18px;font-size:14px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer
-}
-.page-contact .btn:hover{background:#000}
-.page-contact .opt{opacity:.6;font-weight:400}
-.page-contact .small{font-size:12px;color:#777}
-.page-contact .note{margin:.25rem 0 0}
-.page-contact .submit-state{min-height:1.25em;font-size:14px;color:#555}
-.page-contact .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
-
-/* Magazine-style studio panel */
-.page-contact .studio-panel{margin:48px auto 32px; padding:0 16px;}
-.page-contact .studio-card{
-  max-width: 960px; margin: 0 auto;
-  background:#fff; border:1px solid rgba(0,0,0,.06); border-radius:16px;
-  box-shadow: 0 12px 28px rgba(0,0,0,.06);
-  padding: clamp(18px, 3.5vw, 28px);
-}
-
-.page-contact .studio-eyebrow{
-  font-size:12px; letter-spacing:.14em; text-transform:uppercase; opacity:.6; margin:0 0 12px;
-}
-
-.page-contact .studio-layout{
-  display:grid; gap: clamp(16px, 3vw, 28px);
-  grid-template-columns: 2fr 1fr;
-}
-@media (max-width: 900px){
-  .page-contact .studio-layout{ grid-template-columns: 1fr; }
-}
-
-.page-contact .studio-col--about{min-width:0;}
-.page-contact .studio-name{
-  font-size: clamp(18px, 2.2vw, 22px);
-  font-weight: 700; letter-spacing:.01em; margin: 0 0 6px;
-  hyphens:none; word-break: normal;
-}
-.page-contact .studio-address{
-  margin:0; font-style: normal; color:#333; line-height:1.6;
-  white-space: pre-line; /* respect newlines but don’t split words */
-}
-
-.page-contact .studio-col--contact{display:grid; gap:10px; align-content:start;}
-.page-contact .studio-line{
-  display:flex; align-items:baseline; justify-content:space-between;
-  gap: 16px; padding:10px 12px;
-  border:1px solid rgba(0,0,0,.06); border-radius:12px; background:#fff;
-  text-decoration:none; color:inherit;
-}
-.page-contact .studio-line:hover{box-shadow:0 6px 18px rgba(0,0,0,.06)}
-.page-contact .studio-label{
-  font-size:12px; letter-spacing:.12em; text-transform:uppercase; opacity:.65;
-}
-.page-contact .studio-value{
-  font-weight:600; white-space:nowrap; /* no phone/email wrapping */
-  border-bottom: 1px solid rgba(0,0,0,.12);
-}
-
-
-/* Alerts */
-.page-contact .contact-alert{border-radius:8px;padding:10px 12px;margin:0 auto 16px; width:min(720px,100%)}
-.page-contact .contact-success{background:#f0fff4;border:1px solid #b6f0c3;color:#135d2d}
-.page-contact .contact-error{background:#fff5f5;border:1px solid #ffc9c9;color:#7a1c1c}
-</style>
 
 <script>
 // Progressive enhancement: AJAX submit with fetch; falls back to normal POST if blocked
