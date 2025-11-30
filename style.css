@@ -1175,7 +1175,7 @@ body:not(.is-front) .nav-primary .menu {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: clamp(280px, 28vw, 340px);
+  height: clamp(300px, 30vw, 380px);
   overflow: hidden;
   border-radius: inherit;
 }
@@ -1209,7 +1209,7 @@ body:not(.is-front) .nav-primary .menu {
 
 @media (max-width: 780px) {
   .recognition-card__media {
-    height: clamp(220px, 55vw, 260px);
+    height: clamp(240px, 60vw, 300px);
   }
 }
 
