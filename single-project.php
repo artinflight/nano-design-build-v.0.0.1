@@ -25,9 +25,15 @@ $featured_image_url = get_the_post_thumbnail_url( get_the_ID(), 'full' );
 
         <div class="project-content-scroll">
 
-            <header class="site-header-condensed">
-                <h1><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php bloginfo( 'name' ); ?></a></h1>
-            </header>
+           <?php if ( function_exists( 'the_custom_logo' ) && has_custom_logo() ) : ?>
+			<span class="brand">
+				<?php the_custom_logo(); ?>
+			</span>
+		<?php else : ?>
+			<a class="brand" href="<?php echo esc_url( home_url( '/' ) ); ?>">
+				<span class="brand-text"><?php bloginfo( 'name' ); ?></span>
+			</a>
+		<?php endif; ?>
 
             <main id="main" class="site-main">
                 <?php while ( have_posts() ) : the_post(); ?>

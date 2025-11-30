@@ -94,7 +94,7 @@ get_header(); ?>
                         </div>
                         <div class="project-archive-details">
                             <h2 class="project-title"><?php the_title(); ?></h2>
-                            <div class="project-excerpt"><?php the_excerpt(); ?></div>
+                            <!--<div class="project-excerpt"><?php the_excerpt(); ?></div>-->
                             <div class="project-location-tag">
                                 <?php
                                   $locations = get_the_terms( get_the_ID(), 'location' );

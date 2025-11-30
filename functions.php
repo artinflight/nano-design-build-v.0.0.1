@@ -221,6 +221,41 @@ add_action( 'after_setup_theme', function () {
 	) );
 } );
 
+/**
+ * Rewrite hard-coded nano.local menu URLs to the current site URL at render time.
+ *
+ * This fixes old custom menu items that were saved as http://nano.local/...
+ * without having to manually edit them in wp-admin. It only affects menu
+ * items whose URL host is nano.local and preserves the original path.
+ */
+add_filter( 'wp_get_nav_menu_items', function( $items ) {
+    $home = home_url(); // e.g. http://nano.local or https://homelab1.tail744c4.ts.net/
+    $home = rtrim( $home, '/' );
+
+    foreach ( $items as $item ) {
+        if ( empty( $item->url ) ) {
+            continue;
+        }
+
+        $parsed = wp_parse_url( $item->url );
+        if ( ! $parsed ) {
+            continue;
+        }
+
+        // Only touch links that were hard-coded to nano.local
+        if ( isset( $parsed['host'] ) && $parsed['host'] === 'nano.local' ) {
+            $path  = isset( $parsed['path'] ) ? $parsed['path'] : '';
+            $query = isset( $parsed['query'] ) ? '?' . $parsed['query'] : '';
+            $frag  = isset( $parsed['fragment'] ) ? '#' . $parsed['fragment'] : '';
+
+            $item->url = $home . $path . $query . $frag;
+        }
+    }
+
+    return $items;
+}, 10, 1 );
+
+
 // Rewrite legacy nano-design-build-v1.test upload URLs to this site's base URL at render time.
 add_filter('the_content', function ($content) {
     $home = home_url();

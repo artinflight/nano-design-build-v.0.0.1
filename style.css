@@ -328,8 +328,8 @@ body > footer {
 
 /* Compact while hero is visible (just tighter padding) */
 .is-front.home-hero .nav-inner {
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 33px;
+  padding-bottom: 33px;
   color: #fff;
 }
 .is-front.home-hero .site-header { background: transparent; box-shadow: none; }
