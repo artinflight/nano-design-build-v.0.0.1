@@ -1171,18 +1171,12 @@ body:not(.is-front) .nav-primary .menu {
 .recognition-card__media {
   margin: 0;
   line-height: 0;
-  aspect-ratio: 4 / 3;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
   background: linear-gradient(180deg, rgba(0,0,0,.04), rgba(0,0,0,.02));
 }
 .recognition-card__media img {
   display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
 }
 
 .recognition-card__body {
@@ -1502,4 +1496,33 @@ body:not(.is-front) .nav-primary .menu {
 .journal-timeline .media:has(img[src*="nano.svg"]) img {
   width: auto;
   height: 65%;
+}
+
+/* Recognitions archive card media
+   Make all cards share a comfortable height, but don't crop logos */
+.archive-journal .recognition-card,
+.post-type-archive-recognitions .recognition-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.archive-journal .recognition-card__media,
+.post-type-archive-recognitions .recognition-card__media {
+  position: relative;
+  min-height: 260px;
+  max-height: 340px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: inherit;
+}
+
+.archive-journal .recognition-card__media img,
+.post-type-archive-recognitions .recognition-card__media img {
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
 }
