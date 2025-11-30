@@ -24,9 +24,9 @@ the_post();
       <img src="<?php echo esc_url( $hero ); ?>" alt="Studio work by Nano Design Build" loading="eager" fetchpriority="high">
     </figure>
     <div class="about-hero-copy">
-      <h1>Practice</h1>
+      <h1>Nano Design Build</h1>
       <p class="kicker">Founded in 2005 • Toronto, Canada</p>
-      <p class="lede">Nano Design Build creates tailored, light-driven homes with a rigorous, end-to-end approach—design and build, unified.</p>
+      <p class="lede">creates tailored, light-driven homes with a rigorous, end-to-end approach—design and build, unified.</p>
     </div>
   </section>
 
