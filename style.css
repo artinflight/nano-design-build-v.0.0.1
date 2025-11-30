@@ -1172,11 +1172,29 @@ body:not(.is-front) .nav-primary .menu {
   margin: 0;
   line-height: 0;
   background: linear-gradient(180deg, rgba(0,0,0,.04), rgba(0,0,0,.02));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: clamp(280px, 28vw, 340px);
+  overflow: hidden;
+  border-radius: inherit;
 }
+
 .recognition-card__media img {
   display: block;
   width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.recognition-card__media img[src$=".svg"],
+.recognition-card__media img[src$=".SVG"] {
+  width: auto;
   height: auto;
+  max-width: 78%;
+  max-height: 78%;
+  object-fit: contain;
 }
 
 .recognition-card__body {
@@ -1189,8 +1207,14 @@ body:not(.is-front) .nav-primary .menu {
 .recognition-card .entry-title { margin: 0; font-size: clamp(18px, 2.3vw, 22px); }
 .recognition-card .entry-excerpt { color: #333; line-height: 1.6; }
 
+@media (max-width: 780px) {
+  .recognition-card__media {
+    height: clamp(220px, 55vw, 260px);
+  }
+}
+
 /* ------------------------------------------------------------
-   JOURNAL (CPT) — vertical timeline (clean + fixed)
+   JOURNAL (CPT) — vertical timeline (scoped + tidy)
    ------------------------------------------------------------ */
 
 /* Page container (keep site width) */
@@ -1201,8 +1225,7 @@ body:not(.is-front) .nav-primary .menu {
 }
 
 /* Timeline root + rail */
-.timeline,
-.journal-timeline {
+.post-type-archive-journal :is(.timeline, .journal-timeline) {
   --rail-x: 56px;                        /* rail from container left */
   --left-col: calc(var(--rail-x) * 2);   /* width of date+dot column */
   position: relative;
@@ -1210,8 +1233,7 @@ body:not(.is-front) .nav-primary .menu {
   padding: 0;
   margin: 0;
 }
-.timeline::before,
-.journal-timeline::before {
+.post-type-archive-journal :is(.timeline, .journal-timeline)::before {
   content: "";
   position: absolute;
   left: var(--rail-x);
@@ -1222,8 +1244,7 @@ body:not(.is-front) .nav-primary .menu {
 }
 
 /* Every journal item is a grid row (no display:contents) */
-.timeline > li,
-.journal-timeline > li {
+.post-type-archive-journal :is(.timeline > li, .journal-timeline > li) {
   display: grid !important;
   grid-template-columns: var(--left-col) 1fr !important;
   column-gap: clamp(18px, 3vw, 32px);
@@ -1233,8 +1254,8 @@ body:not(.is-front) .nav-primary .menu {
 }
 
 /* Date label (left column) */
-.timeline > li > :is(.time, time, .jt-date, .timeline-date, .posted-on),
-.journal-timeline > li > :is(.time, time, .jt-date, .timeline-date, .posted-on) {
+.post-type-archive-journal :is(.timeline > li > :is(.time, time, .jt-date, .timeline-date, .posted-on),
+.journal-timeline > li > :is(.time, time, .jt-date, .timeline-date, .posted-on)) {
   grid-column: 1 !important;
   margin: 6px 0 0 !important;       /* sits just below the dot */
   padding: 0 !important;
@@ -1244,8 +1265,7 @@ body:not(.is-front) .nav-primary .menu {
 }
 
 /* One dot per item, centered on the rail */
-.timeline .dot,
-.journal-timeline .dot {
+.post-type-archive-journal :is(.timeline .dot, .journal-timeline .dot) {
   position: absolute;
   left: calc(var(--rail-x) - 5px);   /* 10px dot → -5px to center */
   top: .45rem;                       /* tweak to taste */
@@ -1258,8 +1278,7 @@ body:not(.is-front) .nav-primary .menu {
 }
 
 /* Card (right column) */
-.timeline > li > :is(.card, article, .timeline-card),
-.journal-timeline > li > :is(.card, article, .timeline-card) {
+.post-type-archive-journal :is(.timeline, .journal-timeline) > li > :is(.card, article, .timeline-card) {
   grid-column: 2 !important;
   background: #fff;
   border: 1px solid rgba(0,0,0,.08);
@@ -1271,145 +1290,30 @@ body:not(.is-front) .nav-primary .menu {
   gap: clamp(12px, 2vw, 20px);
 }
 
-/* No-thumb variant (fallback) */
-.timeline > li > :is(.card, .timeline-card).no-thumb,
-.journal-timeline > li > :is(.card, .timeline-card).no-thumb {
-  grid-template-columns: 1fr;
-}
-
-/* Media — keep natural aspect, no forced height */
-.timeline .media,
-.journal-timeline .media {
-  display: block;
-  border-radius: 10px;
-  overflow: hidden;
-}
-.timeline .media img,
-.journal-timeline .media img {
-  display: block;
-  width: 100%;
-  height: auto;                      /* <- critical: no stretching */
-  object-fit: cover;                 /* crops only when oversized */
-}
-
-/* Type */
-.timeline :is(h2, h3, .entry-title),
-.journal-timeline :is(h2, h3, .entry-title) {
-  font-size: clamp(20px, 2.4vw, 26px);
-  line-height: 1.2;
-  margin: 2px 0 6px;
-  letter-spacing: .01em;
-}
-.timeline :is(p, .entry-content p),
-.journal-timeline :is(p, .entry-content p) {
-  margin: 0 0 10px;
-  color: #333;
-  line-height: 1.62;
-  max-width: 66ch;
-}
-
-/* Links line */
-.timeline .journal-sources,
-.journal-timeline .journal-sources {
-  margin-top: 4px;
-  font-size: 14px;
-  color: #444;
-}
-.timeline .journal-sources a,
-.journal-timeline .journal-sources a {
-  text-decoration: none;
-  border-bottom: 1px solid rgba(0,0,0,.15);
-}
-.timeline .journal-sources a:hover,
-.journal-timeline .journal-sources a:hover {
-  border-color: currentColor;
-}
-
-/* Mobile */
-@media (max-width: 780px) {
-  .timeline,
-  .journal-timeline {
-    --rail-x: 12px;
-    --left-col: 24px;
-  }
-  .timeline > li,
-  .journal-timeline > li {
-    grid-template-columns: var(--left-col) 1fr !important;
-  }
-  .timeline > li > :is(.card, article, .timeline-card),
-  .journal-timeline > li > :is(.card, article, .timeline-card) {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Journal archive – keep normal site width */
-.post-type-archive-journal .site-main,
-.post-type-archive-journal .site-content,
-.post-type-archive-journal .content-area,
-.post-type-archive-journal .journal-archive,
-.post-type-archive-journal .journal-archive .journal-wrap {
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: clamp(18px, 3vw, 32px) 24px;
-}
-
-/* Date label alignment relative to rail/dot */
-.timeline > li > .time,
-.journal-timeline > li > .time,
-.timeline > li > :is(time,.jt-date,.timeline-date,.posted-on),
-.journal-timeline > li > :is(time,.jt-date,.timeline-date,.posted-on) {
-  grid-column: 1 !important;
-  display: block;
-  margin: 20px 0 0 !important;      /* drop it just below the dot */
-  text-align: right;                 /* place text to the LEFT of the rail */
-  padding-right: 18px;               /* breathing room from the rail/dot */
-}
-
-/* Keep the dot centered on the rail */
-.timeline .dot,
-.journal-timeline .dot {
-  left: calc(var(--rail-x) - 5px);
-  top: .45rem;
-  z-index: 2;
-}
-
-/* Journal — keep text column aligned even when there's no image */
-
-/* 1) Always use a two-column grid for cards */
-.post-type-archive-journal .timeline > li > article,
-.post-type-archive-journal .journal-timeline > li > article{
+/* Ensure two columns even if legacy classes exist */
+.post-type-archive-journal :is(.timeline > li > article, .journal-timeline > li > article) {
   display: grid;
-  grid-template-columns: 280px 1fr;               /* thumb / copy */
+  grid-template-columns: 280px 1fr;
   gap: clamp(12px, 2vw, 20px);
 }
 
-.post-type-archive-journal .timeline > li > article .media{ grid-column: 1; }
-.post-type-archive-journal .timeline > li > article .body { grid-column: 2; }
+.post-type-archive-journal :is(.timeline > li > article .media, .journal-timeline > li > article .media) { grid-column: 1; }
+.post-type-archive-journal :is(.timeline > li > article .body, .journal-timeline > li > article .body) { grid-column: 2; }
 
-/* 2) If there is NO .media, insert a virtual spacer so the copy still starts in col 2 */
 @supports (selector(:has(.x))) {
-  .post-type-archive-journal .timeline > li > article:not(:has(.media))::before,
-  .post-type-archive-journal .journal-timeline > li > article:not(:has(.media))::before{
+  .post-type-archive-journal :is(.timeline > li > article:not(:has(.media)),
+  .journal-timeline > li > article:not(:has(.media)))::before {
     content: "";
-    grid-column: 1;                                /* occupy the thumb column */
+    grid-column: 1;
   }
-  .post-type-archive-journal .timeline > li > article:not(:has(.media)) .body,
-  .post-type-archive-journal .journal-timeline > li > article:not(:has(.media)) .body{
+  .post-type-archive-journal :is(.timeline > li > article:not(:has(.media)) .body,
+  .journal-timeline > li > article:not(:has(.media)) .body) {
     grid-column: 2;
   }
 }
 
-/* 3) Kill any older rule that made .no-thumb one column */
-.journal-timeline > li > :is(.jt-card,.timeline-card).no-thumb,
-.timeline > li > :is(.jt-card,.timeline-card).no-thumb{
-  grid-template-columns: 280px 1fr !important;
-}
-
-/* ===== Journal media: photos fill, SVGs center (portrait box) ===== */
-
-/* Media box (portrait) */
-.timeline .media,
-.journal-timeline .media{
+/* Media: photos fill the box, logos center without cropping */
+.post-type-archive-journal :is(.timeline, .journal-timeline) .media {
   position: relative;
   aspect-ratio: 3 / 4;           /* portrait so tall photos aren’t cropped weirdly */
   border-radius: 10px;
@@ -1420,15 +1324,11 @@ body:not(.is-front) .nav-primary .menu {
   background: #fff;               /* clean backdrop for logos */
 }
 
-/* Baseline */
-.timeline .media img,
-.journal-timeline .media img{
+.post-type-archive-journal :is(.timeline, .journal-timeline) .media img {
   display: block;
 }
 
-/* PHOTOS (non-SVG): full-bleed inside the box */
-.timeline .media img:not([src$=".svg"]),
-.journal-timeline .media img:not([src$=".svg"]){
+.post-type-archive-journal :is(.timeline, .journal-timeline) .media img:not([src$=".svg"]) {
   position: absolute;             /* ignore flex centering */
   inset: 0;
   width: 100%;
@@ -1437,42 +1337,20 @@ body:not(.is-front) .nav-primary .menu {
   object-position: center center;
 }
 
-/* SVG LOGOS: center and size by width */
-.timeline .media img[src$=".svg"],
-.journal-timeline .media img[src$=".svg"]{
+.post-type-archive-journal :is(.timeline, .journal-timeline) .media img[src$=".svg"] {
   position: static;               /* use flex centering from the box */
-  width: 75%;                     /* your logo width */
+  width: 75%;                     /* logo width */
   height: auto;
   max-height: 80%;                /* don’t get taller than the box */
   object-fit: contain;
 }
 
-/* Nano logo: special sizing by height */
-.timeline .media img[src*="nano.svg"],
-.journal-timeline .media img[src*="nano.svg"]{
+.post-type-archive-journal :is(.timeline, .journal-timeline) .media img[src*="nano.svg"] {
   width: auto;                    /* override the 75% width rule */
   height: 65%;                    /* requested scale */
 }
 
-/* Mobile: let the image define height (no fixed ratio) */
-@media (max-width: 780px){
-  .timeline .media,
-  .journal-timeline .media{
-    aspect-ratio: auto;           /* grow naturally on narrow screens */
-  }
-  .timeline .media img:not([src$=".svg"]),
-  .journal-timeline .media img:not([src$=".svg"]){
-    position: static;             /* allow natural flow */
-    width: 100%;
-    height: auto;
-  }
-}
-
-/* ---- Journal media: don't force a fixed height for SVG logos ---- */
-
-/* Modern browsers: remove aspect-ratio when the media contains an SVG */
-.timeline .media:has(img[src$=".svg"]),
-.journal-timeline .media:has(img[src$=".svg"]) {
+.post-type-archive-journal :is(.timeline, .journal-timeline) .media:has(img[src$=".svg"]) {
   aspect-ratio: auto;        /* stop locking the box height */
   height: auto;
   padding: 8px 0;            /* gentle vertical breathing room for logos */
@@ -1481,9 +1359,7 @@ body:not(.is-front) .nav-primary .menu {
   justify-content: center;
 }
 
-/* Size the SVGs nicely (photos already handled elsewhere) */
-.timeline .media:has(img[src$=".svg"]) img,
-.journal-timeline .media:has(img[src$=".svg"]) img {
+.post-type-archive-journal :is(.timeline, .journal-timeline) .media:has(img[src$=".svg"]) img {
   position: static;          /* ignore the absolute full-bleed rules */
   width: 75%;
   height: auto;
@@ -1491,38 +1367,64 @@ body:not(.is-front) .nav-primary .menu {
   object-fit: contain;
 }
 
-/* Nano logo: 65% height as requested */
-.timeline .media:has(img[src*="nano.svg"]) img,
-.journal-timeline .media:has(img[src*="nano.svg"]) img {
+.post-type-archive-journal :is(.timeline, .journal-timeline) .media:has(img[src*="nano.svg"]) img {
   width: auto;
   height: 65%;
 }
 
-/* Recognitions archive card media
-   Make all cards share a comfortable height, but don't crop logos */
-.archive-journal .recognition-card,
-.post-type-archive-recognitions .recognition-card {
-  display: flex;
-  flex-direction: column;
+/* Type */
+.post-type-archive-journal :is(.timeline, .journal-timeline) :is(h2, h3, .entry-title) {
+  font-size: clamp(20px, 2.4vw, 26px);
+  line-height: 1.2;
+  margin: 2px 0 6px;
+  letter-spacing: .01em;
 }
 
-.archive-journal .recognition-card__media,
-.post-type-archive-recognitions .recognition-card__media {
-  position: relative;
-  min-height: 260px;
-  max-height: 340px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  border-radius: inherit;
+.post-type-archive-journal :is(.timeline, .journal-timeline) :is(p, .entry-content p) {
+  margin: 0 0 10px;
+  color: #333;
+  line-height: 1.62;
+  max-width: 66ch;
 }
 
-.archive-journal .recognition-card__media img,
-.post-type-archive-recognitions .recognition-card__media img {
-  width: 100%;
-  height: auto;
-  max-height: 100%;
-  object-fit: contain;
-  display: block;
+.post-type-archive-journal :is(.timeline, .journal-timeline) .journal-sources {
+  margin-top: 4px;
+  font-size: 14px;
+  color: #444;
+}
+.post-type-archive-journal :is(.timeline, .journal-timeline) .journal-sources a {
+  text-decoration: none;
+  border-bottom: 1px solid rgba(0,0,0,.15);
+}
+.post-type-archive-journal :is(.timeline, .journal-timeline) .journal-sources a:hover {
+  border-color: currentColor;
+}
+
+/* Mobile */
+@media (max-width: 780px) {
+  .post-type-archive-journal :is(.timeline, .journal-timeline) {
+    --rail-x: 12px;
+    --left-col: 24px;
+  }
+  .post-type-archive-journal :is(.timeline > li, .journal-timeline > li) {
+    grid-template-columns: var(--left-col) 1fr !important;
+    margin: clamp(12px, 3vw, 20px) 0;
+  }
+  .post-type-archive-journal :is(.timeline, .journal-timeline) > li > :is(.card, article, .timeline-card) {
+    grid-template-columns: 1fr;
+  }
+  .post-type-archive-journal :is(.timeline, .journal-timeline) > li > :is(.card, article, .timeline-card) > .media {
+    grid-row: 1;
+  }
+  .post-type-archive-journal :is(.timeline, .journal-timeline) > li > :is(.card, article, .timeline-card) > .body {
+    grid-row: 2;
+  }
+  .post-type-archive-journal :is(.timeline, .journal-timeline) .media {
+    aspect-ratio: auto;           /* grow naturally on narrow screens */
+  }
+  .post-type-archive-journal :is(.timeline, .journal-timeline) .media img:not([src$=".svg"]) {
+    position: static;             /* allow natural flow */
+    width: 100%;
+    height: auto;
+  }
 }
