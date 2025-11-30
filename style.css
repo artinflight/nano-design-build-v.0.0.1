@@ -58,6 +58,41 @@ img {
 }
 
 /*--------------------------------------------------------------
+# Logo
+--------------------------------------------------------------*/
+
+/* Base logo */
+.brand-logo {
+  display: block;
+  height: 40px;      /* tweak until it matches your previous size */
+  width: auto;
+}
+
+/* Default: assume dark background (hero) → show white logo */
+.brand-logo--light {
+  display: none;
+}
+.brand-logo--dark {
+  display: block;
+}
+
+/* When header is on a light/white background, show colour logo instead */
+
+/* ⚠️ IMPORTANT:
+ * Replace `.site-header--onwhite` below with the EXACT selector
+ * you previously used for the invert rule (e.g. .site-header--light,
+ * .site-header--solid, body.has-light-header .site-header, etc.)
+ */
+.site-header--onwhite .brand-logo--dark {
+  display: none;
+}
+.site-header--onwhite .brand-logo--light {
+  display: block;
+}
+
+
+
+/*--------------------------------------------------------------
 # Layout
 --------------------------------------------------------------*/
 .site-main {
@@ -114,7 +149,6 @@ body > footer {
   width: auto;
   display: block;
   margin: 0 0 0.75rem;
-  filter: invert(1) brightness(200%);
 }
 
 .footer-logo-link:hover { opacity: 0.85; }
@@ -211,12 +245,6 @@ body > footer {
   border-bottom: 1px solid rgba(0,0,0,.06);
   transition: background .25s ease, border-color .25s ease, box-shadow .25s ease, padding .25s ease;
 }
-
-/* Make the logo white in the front-page hero */
-.is-front.home-hero .custom-logo {
-    filter: invert(1) brightness(200%);
-}
-
 
 /* Standard header row layout */
 .nav-inner {

@@ -12,16 +12,29 @@
 <body class="<?php echo esc_attr( $body_classes ); ?>">
 
 <header class="site-header" role="banner">
-	<div class="nav-inner">
-		<?php if ( function_exists( 'the_custom_logo' ) && has_custom_logo() ) : ?>
-			<span class="brand">
-				<?php the_custom_logo(); ?>
-			</span>
-		<?php else : ?>
-			<a class="brand" href="<?php echo esc_url( home_url( '/' ) ); ?>">
-				<span class="brand-text"><?php bloginfo( 'name' ); ?></span>
-			</a>
-		<?php endif; ?>
+<div class="nav-inner">
+	<span class="brand">
+		<a href="<?php echo esc_url( home_url( '/' ) ); ?>">
+			<?php
+				// Explicit logo files from uploads (domain-agnostic)
+				$logo_light = content_url( '/uploads/2025/11/nano-logo-1.svg' );      // on white
+				$logo_dark  = content_url( '/uploads/2025/11/nano-logo-white.svg' );  // on black
+			?>
+			<img
+				src="<?php echo esc_url( $logo_light ); ?>"
+				alt="Nano Design Build"
+				class="brand-logo brand-logo--light"
+			/>
+			<img
+				src="<?php echo esc_url( $logo_dark ); ?>"
+				alt="Nano Design Build"
+				class="brand-logo brand-logo--dark"
+			/>
+		</a>
+	</span>
+    <!-- nav / toggle / etc continues exactly as before -->
+
+
 
 
 		<button class="nav-toggle" aria-controls="primary-menu" aria-expanded="false">
