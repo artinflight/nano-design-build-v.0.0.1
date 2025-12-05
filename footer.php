@@ -49,7 +49,7 @@
         </div>
 
         <div class="footer-copyright" role="contentinfo">
-            © 2006-2025 Nano Design Build
+            © 2006-<?php echo date('Y'); ?> Nano Design Build
         </div>
     </div>
 </footer>
