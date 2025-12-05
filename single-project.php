@@ -131,9 +131,6 @@ $featured_image_url = get_the_post_thumbnail_url( get_the_ID(), 'full' );
                 <?php endwhile; ?>
             </main>
 
-            <footer class="site-footer-condensed">
-                <p>&copy; <?php echo date('Y'); ?> <?php bloginfo( 'name' ); ?></p>
-            </footer>
         </div>
 
     </div>
@@ -196,6 +193,4 @@ $featured_image_url = get_the_post_thumbnail_url( get_the_ID(), 'full' );
         });
     </script>
 
-    <?php wp_footer(); ?>
-</body>
-</html>
+    <?php get_footer(); ?>
