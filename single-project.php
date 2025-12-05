@@ -130,10 +130,6 @@ $featured_image_url = get_the_post_thumbnail_url( get_the_ID(), 'full' );
                     </article>
                 <?php endwhile; ?>
             </main>
-
-            <footer class="site-footer-condensed">
-                <p>&copy; 2006-<?php echo date('Y'); ?> <?php bloginfo( 'name' ); ?></p>
-            </footer>
         </div>
 
     </div>
