@@ -32,6 +32,12 @@ This project is the development of a custom portfolio website for Nano Green Dot
 
 ---
 
+## Brand Tokens
+
+* **Brand accent / highlight color:** `#ff931e` — Use for key accents such as icons, links, and highlight elements; avoid overuse.
+
+---
+
 ## 4. Vibe-Kanban Prompting Protocol
 
 All development tasks assigned to the Vibe-Kanban coding agent will be issued via a structured JSON prompt. This ensures clarity, reduces ambiguity, and creates a documented record of tasks.
