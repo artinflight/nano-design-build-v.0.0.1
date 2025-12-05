@@ -25,15 +25,21 @@ $featured_image_url = get_the_post_thumbnail_url( get_the_ID(), 'full' );
 
         <div class="project-content-scroll">
 
-           <?php if ( function_exists( 'the_custom_logo' ) && has_custom_logo() ) : ?>
-			<span class="brand">
-				<?php the_custom_logo(); ?>
-			</span>
-		<?php else : ?>
-			<a class="brand" href="<?php echo esc_url( home_url( '/' ) ); ?>">
-				<span class="brand-text"><?php bloginfo( 'name' ); ?></span>
-			</a>
-		<?php endif; ?>
+        <?php
+        // Explicit "on white" logo for single-project header
+        $logo_on_white = content_url( '/uploads/2025/11/nano-logo-1.svg' );
+        ?>
+
+        <span class="brand">
+            <a class="brand-link" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
+                <img
+                    src="<?php echo esc_url( $logo_on_white ); ?>"
+                    alt="Nano Design Build"
+                    class="custom-logo custom-logo--light"
+                    decoding="async"
+                />
+            </a>
+        </span>
 
             <main id="main" class="site-main">
                 <?php while ( have_posts() ) : the_post(); ?>

@@ -87,6 +87,13 @@ img {
   display: block;
 }
 
+/* Single project header: always use COLOUR logo (background is light #f8f7f3) */
+body.single-project .site-header .brand-logo--light {
+  display: block !important;
+}
+body.single-project .site-header .brand-logo--dark {
+  display: none !important;
+}
 
 
 /*--------------------------------------------------------------
