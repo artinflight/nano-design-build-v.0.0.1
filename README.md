@@ -34,7 +34,14 @@ This project is the development of a custom portfolio website for Nano Green Dot
 
 ## Brand Tokens
 
-* **Brand accent / highlight color:** `#ff931e` — Use for key accents such as icons, links, and highlight elements; avoid overuse.
+* **Brand accent / highlight color:** `#ff931e` — Use for key accents such as icons, links, and highlight elements; avoid overuse. This is the primary accent orange for Nano Design Build and should be applied to small emphasis elements (e.g., social icons, hover highlights, the © symbol in the footer) rather than large text blocks.
+
+## Footer layout (December 2025 refresh)
+
+* Left column: Nano logo plus the copyright line (© 2006–{current year} Nano Design Build) with the © symbol in `#ff931e`.
+* Middle column: contact details only (phone, address, email) without a “Contact” heading.
+* Right column: social icons in this order — LinkedIn, Instagram, Facebook, YouTube.
+* Footer padding and spacing have been tightened to reduce overall height while preserving readability across breakpoints.
 
 ---
 
