@@ -143,13 +143,14 @@ body > footer {
 
 .footer-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr) auto;
+  grid-template-columns: auto minmax(0, 1fr) auto;
   gap: 1.5rem clamp(1.75rem, 3vw, 2.75rem);
-  align-items: stretch;
+  align-items: center;
   text-align: left;
 }
 .footer-column { font-size: 14px; display: flex; flex-direction: column; gap: 0.65rem; }
 .footer-column--brand { font-size: 14px; gap: 0.55rem; }
+.footer-column--contact { justify-self: center; align-items: flex-start; }
 
 .footer-logo {
   max-height: 32px;
